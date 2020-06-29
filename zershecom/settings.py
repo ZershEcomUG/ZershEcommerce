@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # my apps
     'user.apps.UserConfig',
     'store.apps.StoreConfig',
+    'pages.apps.PagesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,6 +125,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 
 # media configurations
 MEDIA_URL = '/media/'
