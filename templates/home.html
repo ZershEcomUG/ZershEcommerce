@@ -3,11 +3,11 @@
 {% block content %}
     <script src="" async defer></script>
     {% if user.is_authenticated %}
-    <p><a href="{% url 'logout' %}">logout</a></p>
+    <p><a href="{% url 'account_logout' %}">logout</a></p>
     <h1>Welcome {{ user.username }}</h1>
     {% else %}
-    <p>You are not logged in, log in <a href="{% url 'login' %}">here</a></p>
-    <p>Don't have an account? Sign up <a href="{% url 'signup' %}">here</a></p>
+    <p>You are not logged in, log in <a href="{% url 'account_login' %}">here</a></p>
+    <p>Don't have an account? Sign up <a href="{% url 'account_signup' %}">here</a></p>
     {% endif %}
     <div>
       <h2>Home pg</h2>
