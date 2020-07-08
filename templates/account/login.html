@@ -2,11 +2,81 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="container">
+<!--
+    <div class="container">
     <form method="post">
       {% csrf_token %} {{ form|crispy }}
       <button type="submit">login</button>
     </form>
   </div>
-    
+  -->
+
+
+<div class="ps-page--my-account">
+  <div class="ps-breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="index.html">Home</a></li>
+        <li>My account</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ps-my-account" ">
+		<div class=" container" style="padding-bottom: 200px;"> 
+			<form class="ps-form--account ps-tab-root">
+				{% csrf_token %}
+				<ul style="text-align: center;">
+					<li style="display: inline-block"><h2><a href="#">Login</a></h2></li>
+					<li style="display: inline-block; font: bold;" class="active"><a href="{% url 'account_signup' %}">SignUp</a></li>
+				</ul>
+				<div class="ps-tabs">
+					<div class="ps-tab active" id="register">
+						<div class="ps-form__content">
+							<h5>Login</h5>
+							{{ form|crispy }}
+							<div class="form-group submtit">
+								<button class="ps-btn ps-btn--fullwidth">Login</button>
+							</div>
+						</div>
+						<div class="ps-form__footer">
+							<p>Connect with:</p>
+							<ul class="ps-list--social">
+								<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+</div>
+<div class="ps-newsletter">
+  <div class="container">
+    <form class="ps-form--newsletter" action="do_action" method="post">
+      <div class="row">
+        <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 ">
+          <div class="ps-form__left">
+            <h3>Newsletter</h3>
+            <p>Subcribe to get information about products and coupons</p>
+          </div>
+        </div>
+        <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 ">
+          <div class="ps-form__right">
+            <div class="form-group--nest">
+              <input class="form-control" type="email" placeholder="Email address">
+              <button class="ps-btn">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 {% endblock content %}
