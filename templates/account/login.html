@@ -12,7 +12,7 @@
   -->
 
 
-<div class="ps-page--my-account">
+  <div class="ps-page--my-account">
   <div class="ps-breadcrumb">
     <div class="container">
       <ul class="breadcrumb">
@@ -23,7 +23,7 @@
   </div>
   <div class="ps-my-account" ">
 		<div class=" container" style="padding-bottom: 200px;"> 
-			<form class="ps-form--account ps-tab-root">
+			<form class="ps-form--account ps-tab-root" method="POST">
 				{% csrf_token %}
 				<ul style="text-align: center;">
 					<li style="display: inline-block"><h2><a href="#">Login</a></h2></li>
@@ -34,9 +34,7 @@
 						<div class="ps-form__content">
 							<h5>Login</h5>
 							{{ form|crispy }}
-							<div class="form-group submtit">
-								<button class="ps-btn ps-btn--fullwidth">Login</button>
-							</div>
+				      <button class="ps-btn ps-btn--fullwidth" type="submit">Login</button>
 						</div>
 						<div class="ps-form__footer">
 							<p>Connect with:</p>
@@ -52,8 +50,6 @@
 			</form>
 		</div>
 	</div>
-
-
 </div>
 <div class="ps-newsletter">
   <div class="container">
@@ -77,6 +73,8 @@
     </form>
   </div>
 </div>
+-->
+
 
 
 {% endblock content %}

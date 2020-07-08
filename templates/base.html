@@ -230,8 +230,15 @@
             </div>
             <div class="ps-block--user-header">
               <div class="ps-block__left"><i class="icon-user"></i></div>
-              <div class="ps-block__right"><a href="{% url 'account_login' %}">Login</a><a
-                  href="{% url 'account_signup' %}">Register</a></div>
+              <div class="ps-block__right">
+                {% if user.is_authenticated %}
+                <a href="">Hi {{ user.username }}</a>
+                <a href="{% url 'account_logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'account_login' %}">Login</a>
+                <a href="{% url 'account_signup' %}">Register</a>
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
