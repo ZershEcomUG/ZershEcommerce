@@ -17,6 +17,7 @@ class Product(models.Model):
     price = models.FloatField()
     image = models.ImageField(upload_to='pdt_imgs/')
     sku = models.IntegerField()
+    available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
