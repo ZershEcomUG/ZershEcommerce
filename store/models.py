@@ -11,6 +11,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class SubCategory(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=300)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
@@ -18,7 +25,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='pdt_imgs/')
     sku = models.IntegerField()
     available = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    discount = models.IntegerField(default = 0)
+    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
     def __str__(self):
