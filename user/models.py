@@ -22,4 +22,4 @@ class Seller(CustomUser):
     address = models.CharField(max_length=180)
 
     def __str__(self):
-        return self.username
+        return self.store_name

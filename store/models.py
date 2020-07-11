@@ -6,6 +6,7 @@ from user.models import Seller, Customer
 
 class Category(models.Model):
     name = models.CharField(max_length=120)
+    image = models.ImageField(upload_to='cat_imgs')
     description = models.CharField(max_length=250)
 
     def __str__(self):
