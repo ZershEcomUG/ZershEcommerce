@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import Seller, Customer
+from django.urls import reverse
 
 # Create your models here.
 
@@ -20,6 +21,9 @@ class SubCategory(models.Model):
     def __str__(self):
         return self.name
 
+    #def get_absolute_url(self):
+    #   return reverse('subcat_detail', args=[str(self.id)])    
+
 class Product(models.Model):
     name = models.CharField(max_length=120)
     price = models.FloatField()
@@ -32,6 +36,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return  reverse('pdt_detail', args=[str(self.id)])
 
 
 class Order(models.Model):

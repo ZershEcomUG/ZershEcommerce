@@ -24,8 +24,3 @@ class HomePageView(ListView):
         return context
     
 
-class ListingPageView(ListView):
-    pass
-
-class DetailPageView(DetailView):
-    pass

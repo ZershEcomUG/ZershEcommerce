@@ -7,11 +7,11 @@ class Slider(models.Model):
     active = models.BooleanField(default = False)
 
     def __str__(self):
-        return self.image
+        return str(self.image)
 
 class PromotionImg(models.Model):
     image = models.ImageField(upload_to= 'header_imgs')
     active = models.BooleanField(default = False)
 
     def __str__(self):
-        return self.image        
+        return str(self.image)        
