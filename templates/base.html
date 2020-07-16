@@ -211,15 +211,6 @@
                       <p><strong>Sold by:</strong> YOUNG SHOP</p><small>1 x $59.99</small>
                     </div>
                   </div>
-                  <div class="ps-product--cart-mobile">
-                    <div class="ps-product__thumbnail"><a href="#"><img src="img/products/clothing/5.jpg" alt=""></a>
-                    </div>
-                    <div class="ps-product__content"><a class="ps-product__remove" href="#"><i
-                          class="icon-cross"></i></a><a href="product-default.html">Sleeve Linen Blend Caro Pane
-                        Shirt</a>
-                      <p><strong>Sold by:</strong> YOUNG SHOP</p><small>1 x $59.99</small>
-                    </div>
-                  </div>
                 </div>
                 <div class="ps-cart__footer">
                   <h3>Sub Total:<strong>$59.99</strong></h3>
@@ -964,6 +955,18 @@
   </div>
   <!--Header End-->
 
+  <div class="mt-5 py-4">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+    {% endif %}
+  </div>
 
   {% block content %} {% endblock content %}
 

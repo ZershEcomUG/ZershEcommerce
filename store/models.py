@@ -58,13 +58,13 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     customer = models.ForeignKey(
-        CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+        CustomUser, on_delete=models.CASCADE)
     complete = models.BooleanField(default=False, null=True, blank=False)    
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(
         Order, on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
+    quantity = models.IntegerField(default=1, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -54,14 +54,9 @@
                                 </figure>
                             </div>
                             <div class="ps-product__shopping">
-                                <figure>
-                                    <figcaption>Quantity</figcaption>
-                                    <div class="form-group--number">
-                                        <button class="up"><i class="fa fa-plus"></i></button>
-                                        <button class="down"><i class="fa fa-minus"></i></button>
-                                        <input class="form-control" type="text" placeholder="{{ product.quantity }}">
-                                    </div>
-                                </figure><a class="ps-btn ps-btn--black" href="{% url 'add-to-cart' product.id %}">Add to cart</a><a class="ps-btn" href="#">Buy Now</a>
+                                <a class="ps-btn ps-btn--black" href="{% url 'add-to-cart' product.id %}">Add to cart</a>
+                                <a class="ps-btn btn-danger" href="{% url 'remove-from-cart' product.id %}">Remove from cart</a>
+                                <a class="ps-btn" href="#">Buy Now</a>
                                 <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a><a href="#"><i class="icon-chart-bars"></i></a></div>
                             </div>
                             <div class="ps-product__specification"><a class="report" href="#">Report Abuse</a>
