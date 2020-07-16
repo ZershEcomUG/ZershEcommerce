@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import Seller, Customer
+from user.models import *
 from django.urls import reverse
 
 # Create your models here.
@@ -33,6 +33,7 @@ class Product(models.Model):
     discount = models.IntegerField(default = 0)
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+   
 
     def __str__(self):
         return self.name
@@ -40,25 +41,34 @@ class Product(models.Model):
     def get_absolute_url(self):
         return  reverse('pdt_detail', args=[str(self.id)])
 
+    def get_add_to_cart_url(self):
+        return reverse('add-to-cart', args= [str(self.id)] )    
+
 
 class Order(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True)
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
     transaction_id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.customer.username
 
 
 class OrderItem(models.Model):
+    customer = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    complete = models.BooleanField(default=False, null=True, blank=False)    
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(
         Order, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.name} "
 
 
 class ShippingAddress(models.Model):
@@ -74,3 +84,5 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+

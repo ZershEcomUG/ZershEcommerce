@@ -10,9 +10,8 @@
                             <figure>
                                 <div class="ps-wrapper">
                                     <div class="ps-product__gallery" data-arrow="true">
-                                        <div class="item"><a href="img/products/detail/fullwidth/1.jpg"><img src="img/products/detail/fullwidth/1.jpg" alt=""></a></div>
-                                        <div class="item"><a href="img/products/detail/fullwidth/2.jpg"><img src="img/products/detail/fullwidth/2.jpg" alt=""></a></div>
-                                        <div class="item"><a href="img/products/detail/fullwidth/3.jpg"><img src="img/products/detail/fullwidth/3.jpg" alt=""></a></div>
+                                        <div class="item"><a href="#"><img src="{{ product.image.url }}" alt=""></a></div>
+                                        
                                     </div>
                                 </div>
                             </figure>
@@ -60,13 +59,13 @@
                                     <div class="form-group--number">
                                         <button class="up"><i class="fa fa-plus"></i></button>
                                         <button class="down"><i class="fa fa-minus"></i></button>
-                                        <input class="form-control" type="text" placeholder="1">
+                                        <input class="form-control" type="text" placeholder="{{ product.quantity }}">
                                     </div>
-                                </figure><a class="ps-btn ps-btn--black" href="#">Add to cart</a><a class="ps-btn" href="#">Buy Now</a>
+                                </figure><a class="ps-btn ps-btn--black" href="{% url 'add-to-cart' product.id %}">Add to cart</a><a class="ps-btn" href="#">Buy Now</a>
                                 <div class="ps-product__actions"><a href="#"><i class="icon-heart"></i></a><a href="#"><i class="icon-chart-bars"></i></a></div>
                             </div>
                             <div class="ps-product__specification"><a class="report" href="#">Report Abuse</a>
-                                <p><strong>SKU:</strong> SF1133569600-1</p>
+                                <p><strong>SKU:</strong> {{ product.sku }}</p>
                                 <p class="categories"><strong> Categories:</strong><a href="#">Consumer Electronics</a>,<a href="#"> Refrigerator</a>,<a href="#">Babies & Moms</a></p>
                                 <p class="tags"><strong> Tags</strong><a href="#">sofa</a>,<a href="#">technologies</a>,<a href="#">wireless</a></p>
                             </div>
