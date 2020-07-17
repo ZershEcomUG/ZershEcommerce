@@ -26,6 +26,7 @@ def add_to_cart(request, pk):
             orderitem.quantity +=1
             orderitem.save()
             messages.info(request , "This product quantity was updated in your cart")
+            return redirect('pdt_detail', pk =pk ) 
         else:
             order.orderitem_set.add(orderitem)    
             messages.info(request , "This product was added to your cart")
