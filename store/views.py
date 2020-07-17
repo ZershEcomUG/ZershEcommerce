@@ -15,6 +15,15 @@ class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
 
 
+class CartView(ListView):
+    model = Order
+    template_name = 'cart.html'
+
+
+
+#Function to handle adding items to cart or 
+# updating quantity of item incase it's already a cart item
+
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk) 
     orderitem, created = OrderItem.objects.get_or_create(
@@ -38,7 +47,7 @@ def add_to_cart(request, pk):
         return redirect('pdt_detail', pk =pk )  
 
 
-
+#function to handle removal of item from cart
 def remove_from_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     order_qs = Order.objects.filter(customer=request.user, complete=False)
