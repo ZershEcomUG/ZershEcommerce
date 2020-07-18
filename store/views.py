@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, View
 from django.contrib import messages
 from .models import *
 
@@ -15,15 +18,25 @@ class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
 
 
-class CartView(ListView):
-    model = Order
-    template_name = 'cart.html'
+class CartView(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(customer=self.request.user, complete=False)
+            context = {
+                'object': order,
+            }
+            return render(self.request, 'cart.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("/")
+    
 
 
 
 #Function to handle adding items to cart or 
-# updating quantity of item incase it's already a cart item
+# updating quantity of item incase it's already a cart item     
 
+@login_required
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, id=pk) 
     orderitem, created = OrderItem.objects.get_or_create(
@@ -48,6 +61,7 @@ def add_to_cart(request, pk):
 
 
 #function to handle removal of item from cart
+@login_required
 def remove_from_cart(request, pk):
     product = get_object_or_404(Product, id=pk)
     order_qs = Order.objects.filter(customer=request.user, complete=False)
