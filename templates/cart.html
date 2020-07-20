@@ -38,8 +38,8 @@
                                 {% endif %}
                                 <td>
                                     <div class="form-group--number">
-                                        <button class="up">+</button>
-                                        <button class="down">-</button>
+                                        <button class="up"><a href="{% url 'add-to-cart' orderitem.product.id %}">+</a></button>
+                                        <button class="down" ><a href="{% url 'remove-item-from-cart' orderitem.product.id %}">-</a></button>
                                         <input class="form-control" type="text" placeholder="{{ orderitem.quantity }}" value="{{ orderitem.quantity }}">
                                     </div>
                                 </td>
@@ -48,7 +48,11 @@
                                 {% else %}
                                 <td>UGX {{ orderitem.get_total_item_price }}</td>
                                 {% endif %}                                
-                                <td><a href="#"><i class="icon-cross"></i></a></td>
+                                <td><a href="{% url 'remove-from-cart' orderitem.product.id %}"><i class="icon-cross"></i></a></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td><h3>Cart is Empty</h3></td>
                             </tr>
                             {% endfor %}
                         </tbody>
