@@ -23,6 +23,9 @@
                         </div>
                         <div class="ps-product__info">
                             <h1>{{  product.name  }}</h1>
+                            {% if product.discount > 0 %}
+                            <div class="" style="background-color: #dd2400; color: white; width:60px; height:30px; padding:5px; font-weight:bold">-{{ product.discount }}%</div>
+                            {% endif %}
                             <div class="ps-product__meta">
                                 <p>Brand:<a href="shop-default.html">Sony</a></p>
                                 <div class="ps-product__rating">

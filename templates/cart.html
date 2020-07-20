@@ -21,50 +21,40 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for orderitem in object.orderitem_set.all %}
                             <tr>
                                 <td>
                                     <div class="ps-product--cart">
-                                        <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/electronic/1.jpg" alt=""></a></div>
-                                        <div class="ps-product__content"><a href="product-default.html">Marshall Kilburn Wireless Bluetooth Speaker, Black (A4819189)</a>
-                                            <p>Sold By:<strong> YOUNG SHOP</strong></p>
+                                        <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' orderitem.product.id %}"><img src="{{ orderitem.product.image.url }}" alt=""></a></div>
+                                        <div class="ps-product__content"><a href="{% url 'pdt_detail' orderitem.product.id %}">{{ orderitem.product.name }}</a>
+                                            <p>Sold By:<strong>{{ orderitem.product.seller }}</strong></p>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="price">$205.00</td>
+                                {% if orderitem.product.discount > 0 %}
+                                <td class="price">UGX {{ orderitem.product.price }} ({{ orderitem.product.discount }}% off)</td>
+                                {% else %}
+                                <td class="price">UGX {{ orderitem.product.price }} </td>
+                                {% endif %}
                                 <td>
                                     <div class="form-group--number">
                                         <button class="up">+</button>
                                         <button class="down">-</button>
-                                        <input class="form-control" type="text" placeholder="1" value="1">
+                                        <input class="form-control" type="text" placeholder="{{ orderitem.quantity }}" value="{{ orderitem.quantity }}">
                                     </div>
                                 </td>
-                                <td>$205.00</td>
+                                {% if orderitem.product.discount > 0 %}
+                                <td>UGX {{ orderitem.get_total_item_discount_price }}</td>
+                                {% else %}
+                                <td>UGX {{ orderitem.get_total_item_price }}</td>
+                                {% endif %}                                
                                 <td><a href="#"><i class="icon-cross"></i></a></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="ps-product--cart">
-                                        <div class="ps-product__thumbnail"><a href="product-default.html"><img src="img/products/clothing/2.jpg" alt=""></a></div>
-                                        <div class="ps-product__content"><a href="product-default.html">Unero Military Classical Backpack</a>
-                                            <p>Sold By:<strong> YOUNG SHOP</strong></p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="price">$205.00</td>
-                                <td>
-                                    <div class="form-group--number">
-                                        <button class="up">+</button>
-                                        <button class="down">-</button>
-                                        <input class="form-control" type="text" placeholder="1" value="1">
-                                    </div>
-                                </td>
-                                <td>$205.00</td>
-                                <td><a href="#"><i class="icon-cross"></i></a></td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <div class="ps-section__cart-actions"><a class="ps-btn" href="shop-default.html"><i class="icon-arrow-left"></i> Back to Shop</a><a class="ps-btn ps-btn--outline" href="shop-default.html"><i class="icon-sync"></i> Update cart</a></div>
+                <div class="ps-section__cart-actions"><a class="ps-btn" href="{% url 'home' %}"><i class="icon-arrow-left"></i> Back to Shop</a><a class="ps-btn ps-btn--outline" href="shop-default.html"><i class="icon-sync"></i> Update cart</a></div>
             </div>
             <div class="ps-section__footer">
                 <div class="row">
@@ -103,7 +93,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                         <div class="ps-block--shopping-total">
                             <div class="ps-block__header">
-                                <p>Subtotal <span> $683.49</span></p>
+                                <p>Subtotal <span> UGX {{ object.total_price }}</span></p>
                             </div>
                             <div class="ps-block__content">
                                 <ul class="ps-block__product">
