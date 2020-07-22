@@ -117,6 +117,27 @@ class CheckoutView(View):
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
-        if form.is_valid():
-            print('form is valid')
-            return redirect('checkout')
+        try:
+            order = Order.objects.get(customer=self.request.user, complete=False)      
+            if form.is_valid():
+                phone = form.cleaned_data.get('phone')
+                location = form.cleaned_data.get('location')
+                address = form.cleaned_data.get('address')
+                building_apartment_name = form.cleaned_data.get('building_apartment_name ')
+                order_notes = form.cleaned_data.get('order_notes')
+                billing_details = BillingDetails(
+                    user = self.request.user,
+                    phone = phone,
+                    location = location,
+                    address = address,
+                    building_apartment_name = building_apartment_name, 
+                    order_notes = order_notes
+                )
+                billing_details.save() 
+                order.billing_details = billing_details
+                order.save()
+                return redirect('checkout')    
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("cart")
+            
