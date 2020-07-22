@@ -3,6 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, View
+from .forms import CheckoutForm
 from django.contrib import messages
 from .models import *
 
@@ -103,3 +104,19 @@ def remove_item_from_cart(request, pk):
     else:
         messages.info(request , "You do not have an active order")
         return redirect('pdt_detail', pk =pk )
+
+
+
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        form = CheckoutForm
+        context = {
+            'form':form
+        }
+        return render(self.request, 'checkout.html', context )
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            print('form is valid')
+            return redirect('checkout')
