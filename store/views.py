@@ -9,7 +9,8 @@ from .models import *
 
 # Create your views here.
 class ListingPageView(ListView):
-    pass
+    model = Product
+    template_name = 'listing.html'
 
 class SubCatDetailView(DetailView):
     pass
