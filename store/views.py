@@ -127,7 +127,7 @@ class CheckoutView(View):
                 building_apartment_name = form.cleaned_data.get('building_apartment_name ')
                 order_notes = form.cleaned_data.get('order_notes')
                 billing_details = BillingDetails(
-                    user = self.request.user,
+                    customer = self.request.user,
                     phone = phone,
                     location = location,
                     address = address,

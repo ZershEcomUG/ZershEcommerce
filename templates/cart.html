@@ -25,7 +25,7 @@
                             <tr>
                                 <td>
                                     <div class="ps-product--cart">
-                                        <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' orderitem.product.id %}"><img src="{{ orderitem.product.image.url }}" alt=""></a></div>
+                                        <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' orderitem.product.id %}"><img src="{{ orderitem.product.image_300x300.url }}" alt=""></a></div>
                                         <div class="ps-product__content"><a href="{% url 'pdt_detail' orderitem.product.id %}">{{ orderitem.product.name }}</a>
                                             <p>Sold By:<strong>{{ orderitem.product.seller }}</strong></p>
                                         </div>
