@@ -375,14 +375,17 @@
             <div class="ps-carousel--product-box owl-slider" data-owl-auto="true" data-owl-loop="true"
               data-owl-speed="7000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="true" data-owl-item="1"
               data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="500"
-              data-owl-mousedrag="off"><a href="#"><img src="{{ category.image.url }}" alt=""></a>
+              data-owl-mousedrag="off">
+              <a href="#"><img src="{{ category.image_263x629.url }}" alt=""></a>
+              <a href="#"><img src="{{ category.image_263x629_2.url }}" alt=""></a>
+              <a href="#"><img src="{{ category.image_263x629_3.url }}" alt=""></a>
             </div>
           </div>
           <div class="ps-block__product-box">
               {% for product in products  %}
                 {% if product.category.category.name == category.name %}
                   <div class="ps-product ps-product--simple">
-                    <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' product.id %}"><img src="{{ product.image.url }}"
+                    <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' product.id %}"><img src="{{ product.image_300x300.url }}"
                           alt=""></a>
                       {% if product.discount > 0 %}  
                         <div class="ps-product__badge">-{{ product.discount }}%</div>

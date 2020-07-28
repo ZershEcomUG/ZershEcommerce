@@ -7,7 +7,10 @@ from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=120)
-    image = models.ImageField(upload_to='cat_imgs')
+    image_263x629 = models.ImageField(upload_to='cat_imgs')
+    image_263x629_2 = models.ImageField(upload_to='cat_imgs')
+    image_263x629_3 = models.ImageField(upload_to='cat_imgs')
+    img_array = [image_263x629, image_263x629_2, image_263x629_3]
     description = models.CharField(max_length=250)
 
     def __str__(self):
@@ -27,7 +30,12 @@ class SubCategory(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=120)
     price = models.FloatField()
-    image = models.ImageField(upload_to='pdt_imgs/')
+    image_182x182 = models.ImageField(upload_to='pdt_imgs/')
+    image_1200x1200 = models.ImageField(upload_to='pdt_imgs/alt_imgs/')
+    image_600x600 = models.ImageField(upload_to='pdt_imgs/alt_imgs/')
+    image_600x600_2 = models.ImageField(upload_to='pdt_imgs/alt_imgs/')
+    image_300x300 = models.ImageField(upload_to='pdt_imgs/alt_imgs/')
+    img_array = [image_1200x1200, image_600x600, image_600x600_2]
     sku = models.IntegerField()
     available = models.BooleanField(default=True)
     discount = models.IntegerField(default = 0)
