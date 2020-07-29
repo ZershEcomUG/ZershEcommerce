@@ -72,6 +72,7 @@ py manage.py runserver
 ```
 
 -----------Project Navigation------------
+
 css, js, img, fonts, plugins files are in static folder 
 
 template files:
