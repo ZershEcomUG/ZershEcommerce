@@ -80,6 +80,8 @@ eg : <link rel="stylesheet" href="{% static  'css/market-place-1.css'  %}">
 
 to adjust path write it within quotes as seen above
 
+all images for slider promos, categories and products and their info is now all dynamic coming from database as created by admin not like normal html through links
+
 restart server every after you make changes to effect them 
 
 avoid any python code , files please 
