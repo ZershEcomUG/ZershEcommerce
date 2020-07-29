@@ -6,7 +6,7 @@
         {% for pdt in object_list %}
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 ">
             <div class="ps-product">
-                <div class="ps-product__thumbnail"><a href="product-default.html"><img src="{{ product.image.url }}" alt=""></a>
+                <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' pdt.id %}"><img src="{{ pdt.image_300x300.url }}" alt=""></a>
                     {% if pdt.discount > 0 %}  
                         <div class="ps-product__badge">-{{ pdt.discount }}%</div>
                     {% endif %}

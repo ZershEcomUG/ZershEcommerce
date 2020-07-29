@@ -17,19 +17,23 @@ class ListingPageView(ListView):
 class SubCatDetailView(DetailView):
     pass
 
-class ProductDetailView(FormMixin, DetailView):
+class ProductDetailView( DetailView):
     model = Product
     template_name = 'product_detail.html'
-    form_class = ReviewForm
+    #form_class = ReviewForm
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.all().order_by('?')[:6]
+        context['productss'] = Product.objects.all().order_by('?')[:9]
+        return context
+
+
+'''
     def get_success_url(self):
         return reverse('pdt_detail', args=[str(self.id)])
 
-    def get_context_data(self, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(**kwargs)
-        context['form'] = ReviewForm(initial={'product': self.object})
-        return context
-
+    
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
@@ -41,7 +45,7 @@ class ProductDetailView(FormMixin, DetailView):
     def form_valid(self, form):
         form.save()
         return super(ProductDetailView, self).form_valid(form)
-
+'''
 
 class CartView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
