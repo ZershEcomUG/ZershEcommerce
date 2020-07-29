@@ -122,3 +122,16 @@ class BillingDetails(models.Model):
 
     def __str__(self):
         return self.customer.username
+
+
+class Review(models.Model):
+    product = models.ForeignKey(
+        Product , on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE)
+    review = models.IntegerField()
+    review_text = models.CharField( max_length=200, null=True, blank=True )  
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product} review by {self.user.username}'  

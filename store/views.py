@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, DetailView, View
-from .forms import CheckoutForm
+from .forms import CheckoutForm, ReviewForm
 from django.contrib import messages
 from .models import *
 
@@ -15,9 +17,30 @@ class ListingPageView(ListView):
 class SubCatDetailView(DetailView):
     pass
 
-class ProductDetailView(DetailView):
+class ProductDetailView(FormMixin, DetailView):
     model = Product
     template_name = 'product_detail.html'
+    form_class = ReviewForm
+
+    def get_success_url(self):
+        return reverse('pdt_detail', args=[str(self.id)])
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['form'] = ReviewForm(initial={'product': self.object})
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.save()
+        return super(ProductDetailView, self).form_valid(form)
 
 
 class CartView(LoginRequiredMixin, View):
