@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="ps-page--simple">
+    
+    <div class="ps-section--shopping ps-shopping-cart">
+        <div class="container">
+            <div class="ps-section__header">
+                <h1>Shopping Cart</h1>
+            </div>
+            <div class="ps-section__content">
+                <div class="table-responsive">
+                    <table class="table ps-table--shopping-cart">
+                        <thead>
+                            <tr>
+                                <th>Product name</th>
+                                <th>PRICE</th>
+                                <th>QUANTITY</th>
+                                <th>TOTAL</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for orderitem in object.orderitem_set.all %}
+                            <tr>
+                                <td>
+                                    <div class="ps-product--cart">
+                                        <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' orderitem.product.id %}"><img src="{{ orderitem.product.image_300x300.url }}" alt=""></a></div>
+                                        <div class="ps-product__content"><a href="{% url 'pdt_detail' orderitem.product.id %}">{{ orderitem.product.name }}</a>
+                                            <p>Sold By:<strong>{{ orderitem.product.seller }}</strong></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                {% if orderitem.product.discount > 0 %}
+                                <td class="price">UGX {{ orderitem.product.price }} ({{ orderitem.product.discount }}% off)</td>
+                                {% else %}
+                                <td class="price">UGX {{ orderitem.product.price }} </td>
+                                {% endif %}
+                                <td>
+                                    <div class="form-group--number">
+                                        <button class="up"><a href="{% url 'add-to-cart' orderitem.product.id %}">+</a></button>
+                                        <button class="down" ><a href="{% url 'remove-item-from-cart' orderitem.product.id %}">-</a></button>
+                                        <input class="form-control" type="text" placeholder="{{ orderitem.quantity }}" value="{{ orderitem.quantity }}">
+                                    </div>
+                                </td>
+                                {% if orderitem.product.discount > 0 %}
+                                <td>UGX {{ orderitem.get_total_item_discount_price }}</td>
+                                {% else %}
+                                <td>UGX {{ orderitem.get_total_item_price }}</td>
+                                {% endif %}                                
+                                <td><a href="{% url 'remove-from-cart' orderitem.product.id %}"><i class="icon-cross"></i></a></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td><h3>Cart is Empty</h3></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ps-section__cart-actions"><a class="ps-btn" href="{% url 'home' %}"><i class="icon-arrow-left"></i> Back to Shop</a><a class="ps-btn ps-btn--outline" href="shop-default.html"><i class="icon-sync"></i> Update cart</a></div>
+            </div>
+            <div class="ps-section__footer">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                        <figure>
+                            <figcaption>Coupon Discount</figcaption>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <button class="ps-btn ps-btn--outline">Apply</button>
+                            </div>
+                        </figure>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                        <figure>
+                            <figcaption>Calculate shipping</figcaption>
+                            <div class="form-group">
+                                <select class="ps-select">
+                                    <option value="1">America</option>
+                                    <option value="2">Italia</option>
+                                    <option value="3">Vietnam</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Town/City">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Postcode/Zip">
+                            </div>
+                            <div class="form-group">
+                                <button class="ps-btn ps-btn--outline">Update</button>
+                            </div>
+                        </figure>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                        <div class="ps-block--shopping-total">
+                            <div class="ps-block__header">
+                                <p>Subtotal <span> UGX {{ object.total_price }}</span></p>
+                            </div>
+                            <div class="ps-block__content">
+                                <ul class="ps-block__product">
+                                    <li><span class="ps-block__shop">YOUNG SHOP Shipping</span><span class="ps-block__shipping">Free Shipping</span><span class="ps-block__estimate">Estimate for <strong>Viet Nam</strong><a href="#"> MVMTH Classical Leather Watch In Black ×1</a></span></li>
+                                    <li><span class="ps-block__shop">ROBERT’S STORE Shipping</span><span class="ps-block__shipping">Free Shipping</span><span class="ps-block__estimate">Estimate for <strong>Viet Nam</strong><a href="#">Apple Macbook Retina Display 12” ×1</a></span></li>
+                                </ul>
+                                <h3>Total <span>$683.49</span></h3>
+                            </div>
+                        </div><a class="ps-btn ps-btn--fullwidth" href="{% url 'checkout' %}">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

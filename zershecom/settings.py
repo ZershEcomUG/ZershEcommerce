@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # my apps
     'user.apps.UserConfig',
     'store.apps.StoreConfig',
+    'pages.apps.PagesConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # 3rd party apps
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+
 ]
 
 MIDDLEWARE = [
@@ -58,7 +66,7 @@ ROOT_URLCONF = 'zershecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,4 +131,40 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 AUTH_USER_MODEL = 'user.CustomUser'
+
+#LOGIN_REDIRECT_URL = 'home'
+#LOGOUT_REDIRECT_URL = 'home'
+
+
+# media configurations
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# django-crispy-forms config
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# django-allauth config
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
+
+ACCOUNT_SESSION_REMEMBER = True
+
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
+#ACCOUNT_UNIQUE_EMAIL = True
+
+# email config
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
