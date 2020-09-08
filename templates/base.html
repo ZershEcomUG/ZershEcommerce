@@ -13,7 +13,7 @@
   <meta name="author" content="">
   <meta name="keywords" content="">
   <meta name="description" content="">
-  <title>Zersh - Multi Vendor &amp; Marketplace</title>
+  <title>Zersh Stores</title>
   <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext"
     rel="stylesheet">
   <link rel="stylesheet" href="{% static  'plugins/font-awesome/css/font-awesome.min.css'  %}">
@@ -56,28 +56,13 @@
     <div class="header__top">
       <div class="container">
         <div class="header__left">
-          <p>Welcome to Zersh Online Shopping Store !</p>
+          <p>Free shipping on orders above UGX.300,000!</p>
         </div>
         <div class="header__right">
           <ul class="header__top-links">
-            <li><a href="#">Store Location</a></li>
-            <li><a href="#">Track Your Order</a></li>
-            <li>
-              <div class="ps-dropdown"><a href="#">US Dollar</a>
-                <ul class="ps-dropdown-menu">
-                  <li><a href="#">Us Dollar</a></li>
-                  <li><a href="#">Euro</a></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="ps-dropdown language"><a href="#"><img src="img/flag/en.png" alt="">English</a>
-                <ul class="ps-dropdown-menu">
-                  <li><a href="#"><img src="img/flag/germany.png" alt=""> Germany</a></li>
-                  <li><a href="#"><img src="img/flag/fr.png" alt=""> France</a></li>
-                </ul>
-              </div>
-            </li>
+            <li><a href="#">My Zersh</a></li>
+            <li><a href="order-tracking.html">Track my order</a></li>
+            <li><a href="become-a-vendor.html">Sell on Zersh Stores</a></li>
           </ul>
         </div>
       </div>
@@ -86,7 +71,7 @@
       <div class="container">
         <div class="header__content-left">
           <div class="menu--product-categories">
-            <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Department</span></div>
+            <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Category</span></div>
             <div class="menu__content">
               <ul class="menu--dropdown">
                 <li><a href="#"><i class="icon-star"></i> Hot Promotions</a>
@@ -180,7 +165,7 @@
                 </li>
               </ul>
             </div>
-          </div><a class="ps-logo" href="index.html"><img src="img/logo.png" alt=""></a>
+          </div><a class="ps-logo" href="index.html"><img src="img/z3.png" alt=""></a>
         </div>
         <div class="header__content-center">
           <form class="ps-form--quick-search" action="index.html" method="get">
@@ -223,7 +208,7 @@
       <div class="container">
         <div class="navigation__left">
           <div class="menu--product-categories">
-            <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Department</span></div>
+            <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Category</span></div>
             <div class="menu__content">
               <ul class="menu--dropdown">
                 <li><a href="#"><i class="icon-star"></i> Hot Promotions</a>
@@ -563,7 +548,7 @@
       </div>
     </div>
     <div class="navigation--mobile">
-      <div class="navigation__left"><a class="ps-logo" href="index.html"><img src="img/logo_light.png" alt=""></a></div>
+      <div class="navigation__left"><a class="ps-logo" href="index.html"><img src="img/z2.png" alt=""></a></div>
       <div class="navigation__right">
         <div class="header__actions">
           <div class="ps-cart--mini"><a class="header__extra" href="{% url 'cart' %}"><i
@@ -929,8 +914,8 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 ">
                     <div class="ps-form__left">
-                        <h3>Newsletter</h3>
-                        <p>Subcribe to get information about products and coupons</p>
+                        <h3>Subscribe Instantly!</h3>
+                        <p>Be the first to find out when the prices drop or when juicy deals are available just for you!</p>
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12 ">
@@ -964,63 +949,40 @@
           </div>
         </aside>
         <aside class="widget widget_footer">
-          <h4 class="widget-title">Quick links</h4>
+          <h4 class="widget-title">About Zersh</h4>
           <ul class="ps-list--link">
-            <li><a href="#">Policy</a></li>
-            <li><a href="#">Term & Condition</a></li>
-            <li><a href="#">Shipping</a></li>
-            <li><a href="#">Return</a></li>
-            <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="about-us.html">About Us</a></li>
+              <li><a href="newsandblog.html">News and Blog</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="contact-us.html">Contact Us</a></li>
+            
           </ul>
-        </aside>
-        <aside class="widget widget_footer">
-          <h4 class="widget-title">Company</h4>
-          <ul class="ps-list--link">
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="#">Affilate</a></li>
-            <li><a href="#">Career</a></li>
-            <li><a href="contact-us.html">Contact</a></li>
-          </ul>
-        </aside>
-        <aside class="widget widget_footer">
-          <h4 class="widget-title">Bussiness</h4>
-          <ul class="ps-list--link">
-            <li><a href="#">Our Press</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-            <li><a href="my-account.html">My account</a></li>
-            <li><a href="shop-default.html">Shop</a></li>
-          </ul>
-        </aside>
+      </aside>
+      <aside class="widget widget_footer">
+        <h4 class="widget-title">Support</h4>
+        <ul class="ps-list--link">
+            <li><a href="help-center.html">Help Center</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-and-conditions.html">Terms & Condition</a></li>
+            <li><a href="return-and-order-policy.html">Return and Order Policy</a></li>
+            <li><a href="return-and-order-policy.html">How to sell on Zersh</a></li>
+        </ul>
+    </aside>
+    <aside class="widget widget_footer">
+      <h4 class="widget-title">My Zersh</h4>
+      <ul class="ps-list--link">
+          <li><a href="about-us.html">My Account</a></li>
+          <li><a href="contact-us.html">Become an Affiliate</a></li>
+          <li><a href="#">Sell with Zersh</a></li>
+          <li><a href="#">Advertise with Us</a></li>
+          <li><a href="contact-us.html">Become an Affiliate</a></li>
+      </ul>
+  </aside>
       </div>
-      <div class="ps-footer__links">
-        <p><strong>Consumer Electric:</strong><a href="#">Air Conditioners</a><a href="#">Audios &amp; Theaters</a><a
-            href="#">Car Electronics</a><a href="#">Office Electronics</a><a href="#">TV Televisions</a><a
-            href="#">Washing Machines</a>
-        </p>
-        <p><strong>Clothing &amp; Apparel:</strong><a href="#">Printers</a><a href="#">Projectors</a><a
-            href="#">Scanners</a><a href="#">Store &amp; Business</a><a href="#">4K Ultra HD TVs</a><a href="#">LED
-            TVs</a><a href="#">OLED TVs</a>
-        </p>
-        <p><strong>Home, Garden &amp; Kitchen:</strong><a href="#">Cookware</a><a href="#">Decoration</a><a
-            href="#">Furniture</a><a href="#">Garden Tools</a><a href="#">Garden Equipments</a><a href="#">Powers And
-            Hand
-            Tools</a><a href="#">Utensil &amp; Gadget</a>
-        </p>
-        <p><strong>Health &amp; Beauty:</strong><a href="#">Hair Care</a><a href="#">Decoration</a><a href="#">Hair
-            Care</a><a href="#">Makeup</a><a href="#">Body Shower</a><a href="#">Skin Care</a><a href="#">Cologine</a><a
-            href="#">Perfume</a>
-        </p>
-        <p><strong>Jewelry &amp; Watches:</strong><a href="#">Necklace</a><a href="#">Pendant</a><a href="#">Diamond
-            Ring</a><a href="#">Sliver Earing</a><a href="#">Leather Watcher</a><a href="#">Gucci</a>
-        </p>
-        <p><strong>Computer &amp; Technologies:</strong><a href="#">Desktop PC</a><a href="#">Laptop</a><a
-            href="#">Smartphones</a><a href="#">Tablet</a><a href="#">Game Controller</a><a href="#">Audio &amp;
-            Video</a><a href="#">Wireless Speaker</a><a href="#">Done</a>
-        </p>
-      </div>
+     
       <div class="ps-footer__copyright">
-        <p>© 2018 Martfury. All Rights Reserved</p>
-        <p><span>We Using Safe Payment For:</span><a href="#"><img src="img/payment-method/1.jpg" alt=""></a><a
+        <p>© 2020 Zersh Stores. All Rights Reserved</p>
+        <p><span>We use secure payment gateways you can trust:</span><a href="#"><img src="img/payment-method/1.jpg" alt=""></a><a
             href="#"><img src="img/payment-method/2.jpg" alt=""></a><a href="#"><img src="img/payment-method/3.jpg"
               alt=""></a><a href="#"><img src="img/payment-method/4.jpg" alt=""></a><a href="#"><img
               src="img/payment-method/5.jpg" alt=""></a></p>
