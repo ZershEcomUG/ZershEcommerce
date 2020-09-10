@@ -12,6 +12,8 @@ mysqlclient = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
 djangorave = "*"
+django-ravepay = "*"
+ravepay = {editable = true,git = "https://github.com/gbozee/django-ravepay.git",ref = "master"}
 
 [requires]
 python_version = "3.8"
