@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="ps-page--simple">
+    
+    <div class="ps-section--shopping ps-shopping-cart">
+        <div class="container">
+            <div class="ps-section__header">
+                <h1>Payment</h1>
+            </div>
+            <div class="ps-section__content">
+                <form class="ps-form--checkout"  method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12  ">
+                            <div class="ps-form__billing-info">
+                                <h3 class="ps-form__heading">Billing Details</h3>
+                                {{ form|crispy }}
+                                
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12  ">
+                            <div class="ps-form__total">
+                                <h3 class="ps-form__heading">Your Order</h3>
+                                <div class="content">
+                                    <div class="ps-block--checkout-total">
+                                        <div class="ps-block__header">
+                                            <p>Product</p>
+                                            <p>Total</p>
+                                        </div>
+                                        <div class="ps-block__content">
+                                            <table class="table ps-block__products">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="#"> MVMTH Classical Leather Watch In Black ×1</a>
+                                                            <p>Sold By:<strong>YOUNG SHOP</strong></p>
+                                                        </td>
+                                                        <td>$57.99</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="#"> Apple Macbook Retina Display 12” × 1</a>
+                                                            <p>Sold By:<strong>ROBERT’S STORE</strong></p>
+                                                        </td>
+                                                        <td>$625.50</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <h4 class="ps-block__title">Subtotal <span>$863.49</span></h4>
+                                            <div class="ps-block__shippings">
+                                                <figure>
+                                                    <h4>YOUNG SHOP Shipping</h4>
+                                                    <p>Free shipping</p><a href="#"> MVMTH Classical Leather Watch In Black ×1</a>
+                                                </figure>
+                                                <figure>
+                                                    <h4>ROBERT’S STORE Shipping</h4>
+                                                    <p>Free shipping</p><a href="#">Apple Macbook Retina Display 12” ×1</a>
+                                                </figure>
+                                            </div>
+                                            <h3>Total <span>$683.49</span></h3>
+                                        </div>
+                                    </div><a  href="#"><button class="ps-btn ps-btn--fullwidth" style="border: none;" type="submit">{% include 'djangorave/pay_button.html' with payment_model=pay %}</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>           
+
+{% endblock content %}

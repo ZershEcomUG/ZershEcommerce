@@ -25,7 +25,7 @@ SECRET_KEY = 'eq)v7)#87b)+a_^ykuldxo0i7j+x0zpz)c7)iwgu+et7hc%=^)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
+    'djangorave',
 
 ]
 
@@ -168,3 +169,11 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 # email config
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+#djangorave config
+RAVE_PRODUCTION_PUBLIC_KEY = "FLWPUBK-17c228ec3029cfd938f1bbc26f25ba19-X"
+RAVE_PRODUCTION_SECRET_KEY = "FLWSECK-1e0e2ff19b0db9c09edaa2a6ebe4dd35-X"
+RAVE_SANDBOX_PUBLIC_KEY = "FLWPUBK-b79f1bcfe93c4001f53a595c083dee1c-X"
+RAVE_SANDBOX_SECRET_KEY = "FLWSECK-b1288e0ffb30b1f8da4dc76f2eb5d23e-X"
+RAVE_SANDBOX = True

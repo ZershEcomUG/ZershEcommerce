@@ -11,6 +11,7 @@ pillow = "*"
 mysqlclient = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
+djangorave = "*"
 
 [requires]
 python_version = "3.8"

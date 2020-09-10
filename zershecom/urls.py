@@ -26,4 +26,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('pages.urls')),
     path('store/', include('store.urls')),
+    path("djangorave/", include("djangorave.urls", namespace="djangorave")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
