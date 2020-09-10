@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View, TemplateView
 from .forms import CheckoutForm, ReviewForm
 from django.contrib import messages
 from .models import *
-from djangorave.models import PaymentTypeModel
+#from djangorave.models import PaymentTypeModel
 
 # Create your views here.
 class ListingPageView(ListView):
@@ -165,6 +165,7 @@ class CheckoutView(View):
                 billing_details.save() 
                 order.billing_details = billing_details
                 order.save()
+                """
                 payment = PaymentTypeModel(
                     description=self.request.user,
                     amount= order.total_price(),
@@ -172,6 +173,7 @@ class CheckoutView(View):
                     pay_button_text='pay now',
                 )
                 payment.save()
+                """
                 return redirect('payment')    
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
@@ -179,13 +181,15 @@ class CheckoutView(View):
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
+        """
         payment = PaymentTypeModel.objects.filter(
             description=self.request.user
         ).first()
         context = {
             'pay':payment,
         }
-        return render(self.request, 'payment.html' , context)
+        """
+        return render(self.request, 'payment.html' )
 
 
             

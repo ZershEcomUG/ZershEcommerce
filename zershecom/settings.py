@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
-    'djangorave',
+    #'djangorave',
 
 ]
 
