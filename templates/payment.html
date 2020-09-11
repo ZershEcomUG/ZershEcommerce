@@ -25,21 +25,17 @@
                                         <div class="ps-block__content">
                                             <table class="table ps-block__products">
                                                 <tbody>
+                                                    {% for item in order.orderitem_set.all %}
                                                     <tr>
-                                                        <td><a href="#"> MVMTH Classical Leather Watch In Black ×1</a>
-                                                            <p>Sold By:<strong>YOUNG SHOP</strong></p>
+                                                        <td><a href="#"> {{  item.product.name  }} × {{ item.quantity }}</a>
+                                                            <p>Sold By:<strong>{{ item.product.seller }}</strong></p>
                                                         </td>
-                                                        <td>$57.99</td>
+                                                        <td>UGX {{ item.get_final_price }}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><a href="#"> Apple Macbook Retina Display 12” × 1</a>
-                                                            <p>Sold By:<strong>ROBERT’S STORE</strong></p>
-                                                        </td>
-                                                        <td>$625.50</td>
-                                                    </tr>
+                                                    {% endfor %}
                                                 </tbody>
                                             </table>
-                                            <h4 class="ps-block__title">Subtotal <span>$863.49</span></h4>
+                                            <h4 class="ps-block__title">Subtotal <span>UGX {{ order.total_price }}</span></h4>
                                             <div class="ps-block__shippings">
                                                 <figure>
                                                     <h4>YOUNG SHOP Shipping</h4>
@@ -55,7 +51,9 @@
                                     </div>
                                     <script src="https://checkout.flutterwave.com/v3.js"></script>
                                     <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
-                                    <!--<a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" onClick="makePayment()"></button></a>-->
+                                    <p></p>
+                                    <p>Only complete Order after payment is made</p>
+                                    <a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" >Complete Order</button></a>
                                 </div>
                             </div>
                         </div>

@@ -82,12 +82,12 @@ def add_to_cart(request, pk):
         else:
             order.orderitem_set.add(orderitem)    
             messages.info(request , "This product was added to your cart")
-            return redirect('pdt_detail', pk =pk ) 
+            return redirect('cart') 
     else:
         order = Order.objects.create(customer=request.user)
         order.orderitem_set.add(orderitem)
         messages.info(request , "This product was added to your cart")
-        return redirect('pdt_detail', pk =pk )  
+        return redirect('cart' )  
 
 
 #function to handle removal of item from cart
@@ -196,5 +196,24 @@ class PaymentView(View):
         
         return render(self.request, 'payment.html', context )
 
+    def post(self, *args, **kwargs):
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
+        
+        #create payment
+        payment = Payment(
+            customer=self.request.user,
+            amount=amount,
+        )
+
+        payment.save()
+
+        #assign payment to order 
+        order.complete = True
+        order.payment = payment
+        order.save()
+
+        messages.success(self.request, "Your order was succesful")
+        return redirect('home')
 
             
