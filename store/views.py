@@ -185,11 +185,16 @@ class PaymentView(View):
         payment = PaymentTypeModel.objects.filter(
             description=self.request.user
         ).first()
-        context = {
-            'pay':payment,
-        }
         """
-        return render(self.request, 'payment.html' )
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
+        context = {
+            'order':order,
+            'amount':amount,
+
+        }
+        
+        return render(self.request, 'payment.html', context )
 
 
             

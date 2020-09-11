@@ -65,38 +65,43 @@
         </div>
     </div> 
 </div>  
+
 <script>
-    function makePayment() {
-      FlutterwaveCheckout({
-        public_key: "FLWPUBK-17c228ec3029cfd938f1bbc26f25ba19-X",
-        tx_ref: "hooli-tx-1920bbtyt",
-        amount: 54600,
-        currency: "UGX",
-        payment_options: "mobilemoneyuganda",
-        redirect_url: // specified redirect URL
-          "https://callbacks.piedpiper.com/flutterwave.aspx?ismobile=34",
-        meta: {
-          consumer_id: 23,
-          consumer_mac: "92a3-912ba-1192a",
-        },
-        customer: {
-          email: "user@gmail.com",
-          phone_number: "08102909304",
-          name: "yemi desola",
-        },
-        callback: function (data) {
-          console.log(data);
-        },
-        onclose: function() {
-          // close modal
-        },
-        customizations: {
-          title: "My store",
-          description: "Payment for items in cart",
-          logo: "https://assets.piedpiper.com/logo.png",
-        },
-      });
-    }
-</script>        
+  const amount = "{{ amount }}";
+  const name = "{{ order.customer.username }}";
+  const email = "{{ order.customer.email }}";
+
+  function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK-cf914f8aaf732beae663ef0ad36c3462-X",
+      tx_ref: "hooli-tx-1920bbtyt",
+      amount: amount,
+      currency: "UGX",
+      payment_options: "card, mobilemoneyuganda",
+      redirect_url: // specified redirect URL
+        "https://callbacks.piedpiper.com/flutterwave.aspx?ismobile=34",
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: email,
+        phone_number: "08102909304",
+        name: name,
+      },
+      callback: function (data) {
+        console.log(data);
+      },
+      onclose: function() {
+        // close modal
+      },
+      customizations: {
+        title: "Zersh Store",
+        description: "Payment for items in cart",
+        logo: "https://assets.piedpiper.com/logo.png",
+      },
+    });
+  }
+</script>
 
 {% endblock content %}
