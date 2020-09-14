@@ -10,6 +10,66 @@
                 <h1>Payment</h1>
             </div>
             <div class="ps-section__content">
+                <form class="ps-form--checkout" action="index.html" method="get">
+                    <div class="ps-form__content">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                                <div class="ps-block--shipping">
+                                    <div class="ps-block__panel">
+                                        <figure><small>Contact</small>
+                                            <p><a href="#">user@gmail.com</a></p><a href="#">Change</a>
+                                        </figure>
+                                        <figure><small>Ship to</small>
+                                            <p>2015 South Street, Midland, Texas</p><a href="#">Change</a>
+                                        </figure>
+                                    </div>
+                                    <h4>Shipping method</h4>
+                                    <div class="ps-block__panel">
+                                        <figure><small>International Shipping</small><strong> $20.00</strong></figure>
+                                    </div>
+                                    <div class="ps-block--payment-method">
+                                        <form action="" method="post">
+                                            <script src="https://checkout.flutterwave.com/v3.js"></script>
+                                            <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
+                                            <p></p>
+                                            <p>Only complete Order after payment is made</p>
+                                            <a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" >Complete Order</button></a>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                                <div class="ps-block--checkout-order">
+                                    <div class="ps-block__content">
+                                        <figure>
+                                            <figcaption><strong>Product</strong><strong>Total</strong></figcaption>
+                                        </figure>
+                                        <figure class="ps-block__items">
+                                            {% for item in order.orderitem_set.all %}
+                                                <a href="#"><strong>{{  item.product.name  }}</strong><span>{{ item.quantity }}<small>UGX {{ item.get_final_price }}</small></span></a>
+                                            {% endfor %}
+                                        </figure>
+                                        <!--
+                                        <figure>
+                                            <figcaption><strong>Subtotal</strong><strong>$1259.99</strong></figcaption>
+                                        </figure>
+                                        <figure>
+                                            <figcaption><strong>Shipping</strong><strong>$20.00</strong></figcaption>
+                                        </figure>
+                                        -->
+                                        <figure class="ps-block__total">
+                                            <h3>Total<strong>UGX {{ order.total_price }}</strong></h3>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--
+            <div class="ps-section__content">
                 <form class="ps-form--checkout"  method="post">
                     {% csrf_token %}
                     <div class="row">
@@ -60,6 +120,7 @@
                     </div>
                 </form>
             </div>
+            -->
         </div>
     </div> 
 </div>  

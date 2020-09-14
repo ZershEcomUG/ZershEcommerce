@@ -139,7 +139,11 @@ def remove_item_from_cart(request, pk):
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         form = CheckoutForm
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
         context = {
+            'order':order,
+            'amount':amount,
             'form':form
         }
         return render(self.request, 'checkout.html', context )
