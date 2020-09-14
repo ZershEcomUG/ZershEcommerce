@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import *
+from user.models import CustomUser, Seller
 from django.urls import reverse
 
 # Create your models here.
@@ -99,7 +99,7 @@ class OrderItem(models.Model):
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True)
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(
         Order, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.CharField(max_length=200)
