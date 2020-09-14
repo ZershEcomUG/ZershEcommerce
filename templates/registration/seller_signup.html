@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!--
+    <div class="container">
+    <form method="post">
+      {% csrf_token %} {{ form|crispy }}
+      <button class="btn btn-success" type="submit">SignUp</button>
+    </form>
+  </div>
+  -->
+
+<div class="ps-page--my-account">
+	<div class="ps-breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="index.html">Home</a></li>
+				<li>Create Seller Account</li>
+			</ul>
+		</div>
+	</div>
+	<div class="ps-my-account" ">
+		<div class=" container" style="padding-bottom: 200px;"> 
+			<form class="ps-form--account ps-tab-root" method="POST">
+				{% csrf_token %}
+				<ul style="text-align: center;">
+					<li style="display: inline-block; font: bold;" class="active"><h2><a href="#">Seller SignUp</a></h2></li>
+				</ul>
+				<div class="ps-tabs">
+					<div class="ps-tab active" id="register">
+						<div class="ps-form__content">
+							<h5>Register An Account</h5>
+							{{ form|crispy }}
+							<button class="ps-btn ps-btn--fullwidth" type="submit">SignUp</button>
+						</div>
+						<div class="ps-form__footer">
+							<p>Connect with:</p>
+							<ul class="ps-list--social">
+								<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a class="google" href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+{% endblock content %}
