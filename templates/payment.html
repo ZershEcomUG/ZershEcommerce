@@ -17,16 +17,18 @@
                                 <div class="ps-block--shipping">
                                     <div class="ps-block__panel">
                                         <figure><small>Contact</small>
-                                            <p><a href="#">user@gmail.com</a></p><a href="#">Change</a>
+                                            <p><a href="#">{{ order.customer.email  }}</a></p><a href="#"></a>
                                         </figure>
                                         <figure><small>Ship to</small>
-                                            <p>2015 South Street, Midland, Texas</p><a href="#">Change</a>
+                                            <p>{{ order.billing_details.building_apartment_name }}, {{ order.billing_details.address }}, {{ order.billing_details.location }}</p><a href="#"></a>
                                         </figure>
                                     </div>
+                                    <!--
                                     <h4>Shipping method</h4>
                                     <div class="ps-block__panel">
                                         <figure><small>International Shipping</small><strong> $20.00</strong></figure>
                                     </div>
+                                    -->
                                     <div class="ps-block--payment-method">
                                         <form action="" method="post">
                                             <script src="https://checkout.flutterwave.com/v3.js"></script>
@@ -47,7 +49,7 @@
                                         </figure>
                                         <figure class="ps-block__items">
                                             {% for item in order.orderitem_set.all %}
-                                                <a href="#"><strong>{{  item.product.name  }}</strong><span>{{ item.quantity }}<small>UGX {{ item.get_final_price }}</small></span></a>
+                                                <a href="#"><strong>{{  item.product.name  }}</strong><span> x {{ item.quantity }}  <small>UGX {{ item.get_final_price }}</small></span></a>
                                             {% endfor %}
                                         </figure>
                                         <!--
