@@ -31,8 +31,17 @@ class SellerSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_seller = True
         user.save()
-        seller = Seller.objects.create(user=user)
+        seller = Seller.objects.create(
+                user=user,
+                store_name=self.cleaned_data.get('store_name'),
+                address=self.cleaned_data.get('address'),
+                phone=self.cleaned_data.get('phone')
+            
+            )
+
+        """
         seller.store_name.add(*self.cleaned_data.get('store name'))
         seller.address.add(*self.cleaned_data.get('address'))
         seller.phone.add(*self.cleaned_data.get('phone'))
+        """
         return user    
