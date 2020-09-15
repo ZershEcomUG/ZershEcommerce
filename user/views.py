@@ -4,6 +4,8 @@ from django.views.generic import CreateView,DetailView, ListView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .decorators import seller_required
+from store.models import Product
+from store.forms import ProductForm
 
 
 from .forms import SellerSignUpForm
@@ -34,3 +36,14 @@ class UserDashBoardView():
 class SellerDashBoardView(ListView):
     model = Seller
     template_name = 'seller_dashboard.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SellerDashBoardView, self).get_context_data( **kwargs)
+        #context['products'] = Product.objects.filter(seller=self.request.user)[:6]
+        return context
+
+@method_decorator( seller_required , name='dispatch')
+class SellerProductAddView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'seller_add_pdt.html'

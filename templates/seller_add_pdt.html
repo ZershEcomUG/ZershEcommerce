@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="ps-vendor-dashboard">
+    <div class="container">
+        <div class="ps-section__header">
+            <h3>Vendor Dasboard Free</h3>
+            <p>Designed base on WC Vendor Plugin. Martfury also fully comptatiable with other popular plugins as Dokan, YITH, etc .Can help you turns your site into multi-vendor eCommerce site.</p>
+        </div>
+        <div class="ps-section__content">
+            <ul class="ps-section__links">
+                <li><a href="{% url 'seller_dash' %}">Dashboard</a></li>
+                <li><a href="#">Products</a></li>
+                <li class="active"><a href="#">Add Products</a></li>
+                <li><a href="#">Order</a></li>
+                <li><a href="#">Setting</a></li>
+                <li><a href="#">View Store</a></li>
+            </ul>
+            <div class="ps-block--vendor-dashboard">
+                <div class="ps-block__header">
+                    <h3>Add New Product</h3>
+                </div>
+                <div class="ps-block__content">
+                    <form class="ps-form--account-setting" action="index.html" method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="form-group submit">
+                            <button class="ps-btn">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
