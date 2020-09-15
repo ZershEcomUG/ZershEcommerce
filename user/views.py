@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView,DetailView
+from django.views.generic import CreateView,DetailView, ListView
 
 from .forms import SellerSignUpForm
 from .models import CustomUser, Seller
@@ -19,12 +19,12 @@ class SellerSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
-        return redirect('seller_dash', pk =user.pk)
+        return redirect('seller_dash')
 
 
 class UserDashBoardView():
     pass
 
-class SellerDashBoardView(DetailView):
+class SellerDashBoardView(ListView):
     model = Seller
     template_name = 'seller_dashboard.html'
