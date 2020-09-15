@@ -1,6 +1,10 @@
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView,DetailView, ListView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from .decorators import seller_required
+
 
 from .forms import SellerSignUpForm
 from .models import CustomUser, Seller
@@ -25,6 +29,8 @@ class SellerSignUpView(CreateView):
 class UserDashBoardView():
     pass
 
+
+@method_decorator( seller_required , name='dispatch')
 class SellerDashBoardView(ListView):
     model = Seller
     template_name = 'seller_dashboard.html'
