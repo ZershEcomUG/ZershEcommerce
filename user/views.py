@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .decorators import seller_required
 from store.models import Product
 from store.forms import ProductForm
+from django.contrib import messages
 
 
 from .forms import SellerSignUpForm
@@ -38,8 +39,10 @@ class SellerDashBoardView(ListView):
     template_name = 'seller_dashboard.html'
 
     def get_context_data(self, *args, **kwargs):
+        user = CustomUser.objects.get(username=self.request.user.username)
+        user1 = user.seller_set.get(store_name=user.username)
         context = super(SellerDashBoardView, self).get_context_data( **kwargs)
-        #context['products'] = Product.objects.filter(seller=self.request.user)[:6]
+        context['products'] = Product.objects.filter(seller=user1)[:6]
         return context
 
 @method_decorator( seller_required , name='dispatch')
@@ -47,3 +50,8 @@ class SellerProductAddView(CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'seller_add_pdt.html'
+
+    def form_valid(self, form):
+        product = form.save()
+        messages.success(self.request, "Your Product was succesfully added")
+        return redirect('seller_dash')

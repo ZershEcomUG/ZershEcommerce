@@ -23,11 +23,11 @@
                     <h3>Add New Product</h3>
                 </div>
                 <div class="ps-block__content">
-                    <form class="ps-form--account-setting" action="index.html" method="post">
+                    <form class="ps-form--account-setting"  method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="form-group submit">
-                            <button class="ps-btn">Update</button>
+                            <button type="submit" class="ps-btn">Add</button>
                         </div>
                     </form>
                 </div>
