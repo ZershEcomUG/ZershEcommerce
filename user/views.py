@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView,DetailView, ListView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .decorators import seller_required
 from store.models import Product
 from store.forms import ProductForm
@@ -29,8 +30,10 @@ class SellerSignUpView(CreateView):
         return redirect('seller_dash')
 
 
-class UserDashBoardView():
-    pass
+class UserDashBoardView(LoginRequiredMixin, ListView):
+    model = CustomUser
+    template_name = 'user_dashboard.html'
+
 
 
 @method_decorator( seller_required , name='dispatch')
