@@ -60,8 +60,14 @@
         </div>
         <div class="header__right">
           <ul class="header__top-links">
+            {% if user.is_seller  %}
+            <li><a href="{% url 'seller_dash' %}">My Seller Account</a></li>
+            {% elif user.is_authenticated  %}
             <li><a href="{% url 'user_dash' %}">My Account</a></li>
             <li><a href="{% url 'seller_reg' %}">Sell on Zersh Stores</a></li>
+            {% else %}
+            <li><a href="{% url 'seller_reg' %}">Sell on Zersh Stores</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
