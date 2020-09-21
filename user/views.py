@@ -40,6 +40,10 @@ class UserDashBoardView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, "Your Information was succesfully updated")
         return redirect('user_dash', pk=self.request.user.pk)
 
+class UserDashBoardOrdersView(LoginRequiredMixin, DetailView):
+    model = CustomUser
+    fields = ['username', 'email', 'phone']
+    template_name = 'user_dash_orders.html'
 
 
 
