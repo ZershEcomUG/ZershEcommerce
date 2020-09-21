@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView,DetailView, ListView
+from django.views.generic import CreateView,DetailView, UpdateView, ListView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,9 +30,16 @@ class SellerSignUpView(CreateView):
         return redirect('seller_dash')
 
 
-class UserDashBoardView(LoginRequiredMixin, ListView):
+class UserDashBoardView(LoginRequiredMixin, UpdateView):
     model = CustomUser
+    fields = ['username', 'email', 'phone']
     template_name = 'user_dashboard.html'
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your Information was succesfully updated")
+        return redirect('user_dash', pk=self.request.user.pk)
+
 
 
 

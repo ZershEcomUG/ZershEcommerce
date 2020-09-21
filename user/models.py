@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 # Create your models here.
@@ -8,6 +9,10 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_seller = models.BooleanField(default=False)
+    phone = models.IntegerField(blank=True, null=True)
+
+    def get_absolute_url(self):
+        return  reverse('user_dash', args=[str(self.id)])
 
 
 class Seller(models.Model):
