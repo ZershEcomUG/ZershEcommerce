@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .decorators import seller_required
-from store.models import Product
+from store.models import *
 from store.forms import ProductForm
 from django.contrib import messages
 
@@ -40,12 +40,18 @@ class UserDashBoardView(LoginRequiredMixin, UpdateView):
         messages.success(self.request, "Your Information was succesfully updated")
         return redirect('user_dash', pk=self.request.user.pk)
 
+
+
 class UserDashBoardOrdersView(LoginRequiredMixin, DetailView):
     model = CustomUser
-    fields = ['username', 'email', 'phone']
     template_name = 'user_dash_orders.html'
-
-
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserDashBoardOrdersView, self).get_context_data( **kwargs)
+        context['orders'] = Order.objects.filter(customer=self.request.user)
+        #order = Order.objects.get(customer=self.request.user)
+        #context['orderitems'] = order.orderitem_set.all()
+        return context
 
 @method_decorator( seller_required , name='dispatch')
 class SellerDashBoardView(ListView):

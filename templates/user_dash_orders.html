@@ -41,6 +41,9 @@
                         <div class="ps-block__content">
                             <h3>Orders Made</h3>
                             <div class="table-responsive">
+                                {% for order in orders %}
+                                {% if order.complete == True %}
+                                <h5>Order made on {{ order.date_ordered }}</h5>
                                 <table class="table ps-table ps-table--vendor">
                                     <thead>
                                         <tr>
@@ -50,15 +53,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for item in order.orderitem_set.all %}
                                         <tr>
-                                            <td><a href="#">ddd</a></td>
-                                            <td>UGX 2333</td>
+                                            <td><a href="#">{{ item.product.name }}</a></td>
+                                            <td>UGX {{ item.product.price }}</td>
                                             <td></td>
                                         </tr>
-                                        
-                                        
+                                        {% endfor %}
                                     </tbody>
                                 </table>
+                                {% else %}
+                                <p>No Orders made Yet!</p>
+                                {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
