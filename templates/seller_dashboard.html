@@ -3,10 +3,6 @@
 
 <div class="ps-vendor-dashboard">
     <div class="container">
-        <div class="ps-section__header">
-            <h3>Vendor Dasboard Free</h3>
-            <p>Designed base on WC Vendor Plugin. Martfury also fully comptatiable with other popular plugins as Dokan, YITH, etc .Can help you turns your site into multi-vendor eCommerce site.</p>
-        </div>
         <div class="ps-section__content">
             <ul class="ps-section__links">
                 <li class="active"><a href="#">Dashboard</a></li>
@@ -18,7 +14,7 @@
             </ul>
             <div class="ps-block--vendor-dashboard">
                 <div class="ps-block__header">
-                    <h3>Sale Report</h3>
+                    <h3>Recently Added Products</h3>
                 </div>
                 <div class="ps-block__content">
                     <div class="table-responsive">
@@ -27,26 +23,24 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Price</th>
-                                    <th>Sold</th>
-                                    <th>Commission</th>
-                                    <th>Rate</th>
+                                    
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for product in products %}
                                 <tr>
-                                    <td><a href="#">{{ product.name }}</a></td>
+                                    <td><a href="{% url 'pdt_detail' product.id %}">{{ product.name }}</a></td>
                                     <td>UGX {{ product.price }}</td>
-                                    <td></td>
-                                    <td>$2940.00</td>
-                                    <td>24.5%</td>
                                 </tr>
                                 {% endfor %}
-                                <tr>
+                                <!--
+                                    <tr>
                                     <td colspan="3"><strong>Total</strong></td>
                                     <td><strong>124 Sale</strong></td>
                                     <td colspan="2"><strong>$12.104.725</strong></td>
                                 </tr>
+                                -->
                             </tbody>
                         </table>
                     </div>
@@ -58,36 +52,33 @@
                 </div>
                 <div class="ps-block__content">
                     <div class="table-responsive">
-                        <table class="table ps-table ps-table--vendor">
-                            <thead>
-                                <tr>
-                                    <th>date</th>
-                                    <th>Order ID</th>
-                                    <th>Shipping</th>
-                                    <th>Total Price</th>
-                                    <th>Status</th>
-                                    <th>Information</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Nov 4, 2019</td>
-                                    <td><a href="#">MS46891357</a></td>
-                                    <td>$00.00</td>
-                                    <td>$295.47</td>
-                                    <td><a href="#">Open</a></td>
-                                    <td><a href="#">View Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Nov 2, 2017</td>
-                                    <td><a href="#">AP47305441</a></td>
-                                    <td>$00.00</td>
-                                    <td>$25.47</td>
-                                    <td>Close</td>
-                                    <td><a href="#">View Detail</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {% for order in orders %}
+                            {% if order.complete == True %}
+                                <h5>{{ order.date_ordered }}</h5>
+                                <table class="table ps-table ps-table--vendor">
+                                    <thead>
+                                        <tr>
+                                            <th>date</th>
+                                            <th>Order ID</th>
+                                            <th>Total Price</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in order.orderitem_set.all %}
+                                            {% if item.product.seller.username == user.username %}
+                                                <tr>
+                                                    <td>Nov 4, 2019</td>
+                                                    <td><a href="#">MS46891357</a></td>td>$00.00</td>
+                                                    <td>$295.47</td>
+                                                    <td><a href="#">Open</a></td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
