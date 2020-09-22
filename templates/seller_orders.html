@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="ps-vendor-dashboard">
+    <div class="container">
+        <div class="ps-section__content">
+            <ul class="ps-section__links">
+                <li><a href="{% url 'seller_dash' %}">Dashboard</a></li>
+                <li><a href="{% url 'seller_pdts' %}">Products</a></li>
+                <li><a href="{% url 'seller_add_pdt' %}">Add Product</a></li>
+                <li  class="active"><a href="{% url 'seller_orders' %}">Orders</a></li>
+                <li><a href="#">Setting</a></li>
+                <li><a href="#">View Store</a></li>
+            </ul>
+            <div class="ps-block--vendor-dashboard">
+                <div class="ps-block__header">
+                    <h3>Recent Orders</h3>
+                </div>
+                <div class="ps-block__content">
+                    <div class="table-responsive">
+                        {% for item in orders %}
+                            {% if item.product.seller.store_name == user.username and item.order.complete == True %}
+                                <h5>{{ item.order.date_ordered }}</h5>
+                                <table class="table ps-table ps-table--vendor">
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Address</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="{% url 'pdt_detail' item.product.id %}">{{ item.product.name }}</a></td>
+                                            <td>{{ item.quantity }}</td>
+                                            {% if item.product.discount == 0 %}
+                                                <td>UGX {{ item.get_total_item_price }}</td>
+                                            {% else %}
+                                                <td>UGX {{ item.get_total_item_discount_price }}</td>
+                                            {% endif %}
+                                            <td>{{ item.order.billing_details.building_apartment_name }}, {{ item.order.billing_details.address }},  {{ item.order.billing_details.location }}</td>
+                                            <td><a href="#">Open</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

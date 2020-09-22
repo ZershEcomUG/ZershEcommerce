@@ -89,3 +89,14 @@ class SellerProductsView(ListView):
         context = super(SellerProductsView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')
         return context
+
+
+@method_decorator( seller_required , name='dispatch')
+class SellerOrdersView(ListView):
+    model = Order
+    template_name = 'seller_orders.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SellerOrdersView, self).get_context_data( **kwargs)
+        context['orders'] = OrderItem.objects.all().order_by('-id')
+        return context        
