@@ -27,6 +27,7 @@ class ProductDetailView( DetailView):
         context = super(ProductDetailView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.all().order_by('?')[:6]
         context['productss'] = Product.objects.all().order_by('?')[:9]
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
         return context
 
 

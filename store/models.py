@@ -39,6 +39,8 @@ class Product(models.Model):
     sku = models.IntegerField()
     available = models.BooleanField(default=True)
     discount = models.IntegerField(default = 0)
+    description = models.CharField(max_length=120, blank=True, null=True)
+    brand = models.CharField(max_length=120, blank=True, null=True)
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
    
