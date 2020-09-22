@@ -63,7 +63,7 @@ class SellerDashBoardView(ListView):
         user1 = user.seller_set.get(store_name=user.username)
         context = super(SellerDashBoardView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')[:11]
-        context['orders'] = Order.objects.all()
+        context['orders'] = OrderItem.objects.all().order_by('-id')
         return context
 
 @method_decorator( seller_required , name='dispatch')

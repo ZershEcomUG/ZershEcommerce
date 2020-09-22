@@ -10,7 +10,8 @@
                 <h1>Payment</h1>
             </div>
             <div class="ps-section__content">
-                <form class="ps-form--checkout" action="index.html" method="get">
+                <form class="ps-form--checkout"  method="post">
+                    {% csrf_token %}
                     <div class="ps-form__content">
                         <div class="row">
                             <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
@@ -31,6 +32,7 @@
                                     -->
                                     <div class="ps-block--payment-method">
                                         <form action="" method="post">
+                                            {% csrf_token %}
                                             <script src="https://checkout.flutterwave.com/v3.js"></script>
                                             <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
                                             <p></p>

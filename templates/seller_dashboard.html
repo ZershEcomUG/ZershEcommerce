@@ -52,29 +52,31 @@
                 </div>
                 <div class="ps-block__content">
                     <div class="table-responsive">
-                        {% for order in orders %}
-                            {% if order.complete == True %}
-                                <h5>{{ order.date_ordered }}</h5>
+                        {% for item in orders %}
+                            {% if item.product.seller.store_name == user.username and item.order.complete == True %}
+                                <h5>{{ item.order.date_ordered }}</h5>
                                 <table class="table ps-table ps-table--vendor">
                                     <thead>
                                         <tr>
-                                            <th>date</th>
-                                            <th>Order ID</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
                                             <th>Total Price</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for item in order.orderitem_set.all %}
-                                            {% if item.product.seller.username == user.username %}
+                                        
                                                 <tr>
-                                                    <td>Nov 4, 2019</td>
-                                                    <td><a href="#">MS46891357</a></td>td>$00.00</td>
-                                                    <td>$295.47</td>
+                                                    <td><a href="{% url 'pdt_detail' item.product.id %}">{{ item.product.name }}</a></td>
+                                                    <td>{{ item.quantity }}</td>
+                                                    {% if item.product.discount == 0 %}
+                                                        <td>UGX {{ item.get_total_item_price }}</td>
+                                                    {% else %}
+                                                        <td>UGX {{ item.get_total_item_discount_price }}</td>
+                                                    {% endif %}
                                                     <td><a href="#">Open</a></td>
                                                 </tr>
-                                            {% endif %}
-                                        {% endfor %}
+                                            
                                     </tbody>
                                 </table>
                             {% endif %}
