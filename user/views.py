@@ -76,3 +76,16 @@ class SellerProductAddView(CreateView):
         product = form.save()
         messages.success(self.request, "Your Product was succesfully added")
         return redirect('seller_dash')
+
+
+@method_decorator( seller_required , name='dispatch')
+class SellerProductsView(ListView):
+    model = Product
+    template_name = 'seller_pdts.html'
+
+    def get_context_data(self, *args, **kwargs):
+        user = CustomUser.objects.get(username=self.request.user.username)
+        user1 = user.seller_set.get(store_name=user.username)
+        context = super(SellerProductsView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.filter(seller=user1).order_by('-id')
+        return context
