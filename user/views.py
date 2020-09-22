@@ -64,6 +64,7 @@ class SellerDashBoardView(ListView):
         context = super(SellerDashBoardView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')[:11]
         context['orders'] = OrderItem.objects.all().order_by('-id')
+        context['sellers'] = user.seller_set.get(store_name=user.username)
         return context
 
 @method_decorator( seller_required , name='dispatch')
@@ -71,6 +72,12 @@ class SellerProductAddView(CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'seller_add_pdt.html'
+
+    def get_context_data(self, *args, **kwargs):
+        user = CustomUser.objects.get(username=self.request.user.username)
+        context = super(SellerProductAddView, self).get_context_data( **kwargs)
+        context['sellers'] = user.seller_set.get(store_name=user.username)
+        return context
 
     def form_valid(self, form):
         product = form.save()
@@ -88,6 +95,7 @@ class SellerProductsView(ListView):
         user1 = user.seller_set.get(store_name=user.username)
         context = super(SellerProductsView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')
+        context['sellers'] = user.seller_set.get(store_name=user.username)
         return context
 
 
@@ -97,6 +105,24 @@ class SellerOrdersView(ListView):
     template_name = 'seller_orders.html'
 
     def get_context_data(self, *args, **kwargs):
+        user = CustomUser.objects.get(username=self.request.user.username)
         context = super(SellerOrdersView, self).get_context_data( **kwargs)
         context['orders'] = OrderItem.objects.all().order_by('-id')
+        context['sellers'] = user.seller_set.get(store_name=user.username)
         return context        
+
+
+@method_decorator( seller_required , name='dispatch')
+class SellerSettingsView(UpdateView):
+    model = Seller
+    fields = [ 'store_name', 'address', 'phone', 'email']
+    template_name = 'seller_Settings.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SellerSettingsView, self).get_context_data( **kwargs)
+        return context
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your Information was succesfully updated")
+        return redirect('seller_dash')    
