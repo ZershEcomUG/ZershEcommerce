@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.shortcuts import render, redirect
+from django.views.generic import View, TemplateView, ListView, DetailView
 from store.models import Category, SubCategory, Product
 from pages.models import Slider, PromotionImg
+from .forms import ContactForm
+from .models import Contact
 # Create your views here.
 
 
@@ -28,8 +30,29 @@ class HomePageView(ListView):
 class AboutPageView(TemplateView):
     template_name = 'about-us.html'
 
-class ContactPageView(TemplateView):
-    template_name = 'contact.html'
+class ContactPageView(View):
+    def get(self, *args, **kwargs):
+        form = ContactForm
+        context = {
+            'form':form            
+        }
+        return render(self.request, 'contact.html', context )
+
+    def post(self, *args, **kwargs):
+        form = ContactForm(self.request.POST or None)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            subject = form.cleaned_data.get('subject')
+            message = form.cleaned_data.get('message')
+            contact = Contact(
+                name = name,
+                email = email, 
+                subject = subject,
+                message = message
+            )
+            contact.save() 
+            return redirect('home')
 
 class PrivacyPageView(TemplateView):
     template_name = 'privacy-policy.html'

@@ -392,7 +392,13 @@
             
           </div>
           <div class="ps-block--user-header">
-            <div class="ps-block__left" ><a class="header__extra" href="{% url 'user_dash' user.id %}"><i class="icon-user"></i></a></div>
+            <div class="ps-block__left" >
+              {% if user.is_authenticated %}
+              <a class="header__extra" href="{% url 'user_dash' user.id %}"><i class="icon-user"></i></a>
+              {% else %}
+              <i class="icon-user"></i>
+              {% endif %}
+            </div>
             <div class="ps-block__right">
               {% if user.is_authenticated %}
                 <a href="">Hi {{ user.username }}</a>

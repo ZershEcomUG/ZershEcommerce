@@ -14,4 +14,13 @@ class PromotionImg(models.Model):
     active = models.BooleanField(default = False)
 
     def __str__(self):
-        return str(self.image)        
+        return str(self.image)    
+
+class Contact(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    subject = models.CharField(max_length=200)
+    message = models.TextField(max_length=400)
+
+    def __str__(self):
+        return self.name            
