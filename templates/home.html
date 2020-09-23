@@ -26,9 +26,15 @@
           <div class="ps-banner--market-1" data-background="img/slider/home-3/home-banner/1.jpg"><img
               src="{{ slider.image.url }}" alt="">
             <div class="ps-banner__content">
-              <h5>Mega Sale Nov 2019</h5>
-              <h3>Double Combo With <br> The Body Shop</h3>
-              <p>Sale up to <strong>50% Off </strong></p><a class="ps-btn" href="#">Shop Now</a>
+              <h5>{{ slider.heading }}</h5>
+              <h3>{{ slider.description }}</h3>
+              <p>{{ slider.description2 }}</p>
+              {% if slider.point_to_category == True %}
+              <a class="ps-btn" href="{% url 'cat_detail' slider.associated_category.id %}">Shop Now</a>
+              {% endif %}
+              {% if slider.point_to_subcategory == True %}
+              <a class="ps-btn" href="{% url 'subcat_detail' slider.associated_subcategory.id %}">Shop Now</a>
+              {% endif %}
             </div>
           </div>
         {% endif %}

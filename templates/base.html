@@ -38,20 +38,25 @@
       </p>
     <![endif]-->
   <!--Header-->
-  <div class="ps-block--promotion-header bg--cover" data-background="img/promotions/header-promotion.jpg">
+  {% for ad in ads %}
+  {% if ad.active == True%}
+  <div class="ps-block--promotion-header bg--cover" data-background="{{ ad.image1920x80.url }}">
     <div class="container">
       <div class="ps-block__left">
-        <h3>20%</h3>
+        {% if ad.discount_offer %}
+        <h3>{{ ad.discount_offer }}</h3>
         <figure>
           <p>Discount</p>
-          <h4>For Books Of March</h4>
+        {% endif %}  
+          <h4>{{ ad.description }}</h4>
         </figure>
       </div>
       <div class="ps-block__center">
-        <p>Enter Promotion<span>Sale2019</span></p>
-      </div><a class="ps-btn ps-btn--sm" href="#">Shop now</a>
+        <p>{{ ad.description2 }}</p>
     </div>
   </div>
+  {% endif %}
+  {% endfor %}
   <header class="header header--standard header--market-place-1" data-sticky="true">
     <div class="header__top">
       <div class="container">
@@ -366,7 +371,7 @@
             </li>
           </ul>
           <div class="ps-block--header-hotline inline">
-            <p><i class="icon-telephone"></i>Hotline:<strong> 1-800-234-5678</strong></p>
+            <p><i class="icon-telephone"></i>Hotline:<strong> 0783754870 | 0759018540</strong></p>
           </div>
         </div>
       </div>
@@ -643,8 +648,8 @@
           <h4 class="widget-title">Contact us</h4>
           <div class="widget_content">
             <p>Call us 24/7</p>
-            <h3>1800 97 97 69</h3>
-            <p>502 New Design Str, Melbourne, Australia <br><a href="mailto:contact@martfury.co">contact@martfury.co</a>
+            <h3>0783754870 | 0759018540</h3>
+            <p>Kampala, Uganda <br><a href="mailto:info@zershstores.com">info@zershstores.com</a>
             </p>
             <ul class="ps-list--social">
               <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
