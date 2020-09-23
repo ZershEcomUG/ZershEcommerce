@@ -189,7 +189,8 @@
           </div><a class="ps-logo" href="{% url 'home' %}"><img  src="{% static 'img/zer2.png' %}" alt=""></a>
         </div>
         <div class="header__content-center">
-          <form class="ps-form--quick-search" action="index.html" method="get">
+          <form class="ps-form--quick-search" action="{% url 'search_results' %}"
+          method="get">
             <div class="form-group--icon"><i class="icon-chevron-down"></i>
               <select class="form-control">
                 <option value="1">All</option>
@@ -198,7 +199,7 @@
                 <option value="1">Technology toys</option>
               </select>
             </div>
-            <input class="form-control" type="text" placeholder="I'm shopping for...">
+            <input name="q" class="form-control" type="text" placeholder="I'm shopping for...">
             <button>Search</button>
           </form>
         </div>
@@ -406,9 +407,10 @@
       </div>
     </div>
     <div class="ps-search--mobile">
-      <form class="ps-form--search-mobile" action="index.html" method="get">
+      <form class="ps-form--search-mobile" action="{% url 'search_results' %}"
+      method="get">
         <div class="form-group--nest">
-          <input class="form-control" type="text" placeholder="Search something...">
+          <input name="q" class="form-control" type="text" placeholder="Search something...">
           <button><i class="icon-magnifier"></i></button>
         </div>
       </form>
@@ -547,9 +549,10 @@
   </div>
   <div class="ps-panel--sidebar" id="search-sidebar">
     <div class="ps-panel__header">
-      <form class="ps-form--search-mobile" action="index.html" method="get">
+      <form class="ps-form--search-mobile" action="{% url 'search_results' %}"
+      method="get">
         <div class="form-group--nest">
-          <input class="form-control" type="text" placeholder="Search something...">
+          <input name="q" class="form-control" type="text" placeholder="Search something...">
           <button><i class="icon-magnifier"></i></button>
         </div>
       </form>

@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, View, TemplateView
 from .forms import CheckoutForm, ReviewForm
 from django.contrib import messages
 from .models import *
+from django.db.models import Q
 #from djangorave.models import PaymentTypeModel
 
 # Create your views here.
@@ -35,6 +36,18 @@ class SubCatDetailView(DetailView):
         context['products'] = Product.objects.all().order_by('?')
         context['pdts'] = Product.objects.all().order_by('?')[:3]
         return context
+
+class SearchResultsListView(ListView): 
+    model = Product
+    context_object_name = 'product_list'
+    template_name = 'search_results.html'   
+
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        return Product.objects.filter(
+        Q(name__icontains=query) | Q(brand__icontains=query) 
+        )
+     
 
 class ProductDetailView( DetailView):
     model = Product
