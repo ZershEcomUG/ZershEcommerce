@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="ps-vendor-dashboard">
+    <div class="container">
+        <div class="ps-section__content">
+            <ul class="ps-section__links">
+                <li><a href="{% url 'seller_dash' %}">Dashboard</a></li>
+                <li><a href="{% url 'seller_pdts' %}">Products</a></li>
+                <li class="active"><a href="#">Add Products</a></li>
+                <li><a href="{% url 'seller_orders' %}">Orders</a></li>
+                <li><a href="{% url 'seller_settings' sellers.id %}">Setting</a></li>
+            </ul>
+            <div class="ps-block--vendor-dashboard">
+                <div class="ps-section__content">
+                    <div class="container">
+                        <div class="ps-block__header">
+                            <h3>Add New Product</h3>
+                        </div>
+                        <div class="ps-block__content">
+                            <form class="ps-form--account-setting"  method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="form-group submit">
+                                    <button type="submit" class="ps-btn">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

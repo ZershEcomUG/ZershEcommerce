@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="ps-vendor-dashboard">
+    <div class="container">
+        <div class="ps-section__content">
+            <ul class="ps-section__links">
+                <li><a href="{% url 'seller_dash' %}">Dashboard</a></li>
+                <li  class="active"><a href="{% url 'seller_pdts' %}">Products</a></li>
+                <li><a href="{% url 'seller_add_pdt' %}">Add Product</a></li>
+                <li><a href="{% url 'seller_orders' %}">Orders</a></li>
+                <li><a href="{% url 'seller_settings' sellers.id %}">Setting</a></li>
+            </ul>
+            <div class="ps-block--vendor-dashboard">
+                <div class="ps-block__header">
+                    <h3>Added Products</h3>
+                </div>
+                <div class="ps-block__content">
+                    <div class="table-responsive">
+                        <table class="table ps-table ps-table--vendor">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product in products %}
+                                <tr>
+                                    <td><a href="{% url 'pdt_detail' product.id %}">{{ product.name }}</a></td>
+                                    <td>UGX {{ product.price }}</td>
+                                    <td>{{ product.description }}</td>
+                                    <td><a href="{% url 'seller_edit_pdt' product.id %}">edit</a></td>
+                                </tr>
+                                {% endfor %}
+                                <!--
+                                    <tr>
+                                    <td colspan="3"><strong>Total</strong></td>
+                                    <td><strong>124 Sale</strong></td>
+                                    <td colspan="2"><strong>$12.104.725</strong></td>
+                                </tr>
+                                -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

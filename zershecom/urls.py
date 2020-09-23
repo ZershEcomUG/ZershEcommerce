@@ -17,13 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler404
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('users/', include('user.urls')),
-    #path('users/', include('django.contrib.auth.urls')),
+    path('users/', include('user.urls')),
+    path('users/', include('django.contrib.auth.urls')),
     path('accounts/', include('allauth.urls')),
     path('', include('pages.urls')),
     path('store/', include('store.urls')),
+    #path("djangorave/", include("djangorave.urls", namespace="djangorave")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+#error handlers
+handler404 = 'store.views.error_404'
+#handler500 = 'store.views.my_custom_error_view'

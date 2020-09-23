@@ -4,18 +4,50 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, View, TemplateView
 from .forms import CheckoutForm, ReviewForm
 from django.contrib import messages
 from .models import *
+from django.db.models import Q
+#from djangorave.models import PaymentTypeModel
 
 # Create your views here.
+class CatDetailView(DetailView):
+    model = Category
+    template_name = 'listing.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CatDetailView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.all().order_by('?')
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
+        return context
+
+
 class ListingPageView(ListView):
     model = Product
     template_name = 'listing.html'
 
 class SubCatDetailView(DetailView):
-    pass
+    model = SubCategory
+    template_name = 'listing2.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SubCatDetailView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.all().order_by('?')
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
+        return context
+
+class SearchResultsListView(ListView): 
+    model = Product
+    context_object_name = 'product_list'
+    template_name = 'search_results.html'   
+
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        return Product.objects.filter(
+        Q(name__icontains=query) | Q(brand__icontains=query) 
+        )
+     
 
 class ProductDetailView( DetailView):
     model = Product
@@ -26,6 +58,7 @@ class ProductDetailView( DetailView):
         context = super(ProductDetailView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.all().order_by('?')[:6]
         context['productss'] = Product.objects.all().order_by('?')[:9]
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
         return context
 
 
@@ -81,12 +114,12 @@ def add_to_cart(request, pk):
         else:
             order.orderitem_set.add(orderitem)    
             messages.info(request , "This product was added to your cart")
-            return redirect('pdt_detail', pk =pk ) 
+            return redirect('cart') 
     else:
         order = Order.objects.create(customer=request.user)
         order.orderitem_set.add(orderitem)
         messages.info(request , "This product was added to your cart")
-        return redirect('pdt_detail', pk =pk )  
+        return redirect('cart' )  
 
 
 #function to handle removal of item from cart
@@ -138,7 +171,11 @@ def remove_item_from_cart(request, pk):
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         form = CheckoutForm
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
         context = {
+            'order':order,
+            'amount':amount,
             'form':form
         }
         return render(self.request, 'checkout.html', context )
@@ -164,8 +201,65 @@ class CheckoutView(View):
                 billing_details.save() 
                 order.billing_details = billing_details
                 order.save()
-                return redirect('checkout')    
+                """
+                payment = PaymentTypeModel(
+                    description=self.request.user,
+                    amount= order.total_price(),
+                    currency='UGX',
+                    pay_button_text='pay now',
+                )
+                payment.save()
+                """
+                return redirect('payment')    
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("cart")
+
+class PaymentView(View):
+    def get(self, *args, **kwargs):
+        """
+        payment = PaymentTypeModel.objects.filter(
+            description=self.request.user
+        ).first()
+        """
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
+        context = {
+            'order':order,
+            'amount':amount,
+
+        }
+        
+        return render(self.request, 'payment.html', context )
+
+    def post(self, *args, **kwargs):
+        order = Order.objects.get(customer=self.request.user, complete=False)
+        amount = order.total_price()
+        
+        #create payment
+        payment = Payment(
+            customer=self.request.user,
+            amount=amount,
+        )
+
+        payment.save()
+
+        #assign payment to order
+        
+        order_items = order.orderitem_set.all()
+        order_items.update(complete=True)
+        for item in order_items:
+            item.save()
+    
+        order.complete = True
+        order.payment = payment
+        order.save()
+
+        messages.success(self.request, "Your order was succesful")
+        return redirect('home')
+
             
+
+def error_404(request, exception):
+    context = {}
+    return render(request, 'error.html', context)

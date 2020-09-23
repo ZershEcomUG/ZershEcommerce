@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="ps-page--simple">
+    
+    <div class="ps-section--shopping ps-shopping-cart">
+        <div class="container">
+            <div class="ps-section__header">
+                <h1>Payment</h1>
+            </div>
+            <div class="ps-section__content">
+                <form class="ps-form--checkout"  method="post">
+                    {% csrf_token %}
+                    <div class="ps-form__content">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
+                                <div class="ps-block--shipping">
+                                    <div class="ps-block__panel">
+                                        <figure><small>Contact</small>
+                                            <p><a href="#">{{ order.customer.email  }}</a></p><a href="#"></a>
+                                        </figure>
+                                        <figure><small>Ship to</small>
+                                            <p>{{ order.billing_details.building_apartment_name }}, {{ order.billing_details.address }}, {{ order.billing_details.location }}</p><a href="#"></a>
+                                        </figure>
+                                    </div>
+                                    <!--
+                                    <h4>Shipping method</h4>
+                                    <div class="ps-block__panel">
+                                        <figure><small>International Shipping</small><strong> $20.00</strong></figure>
+                                    </div>
+                                    -->
+                                    <div class="ps-block--payment-method">
+                                        <form action="" method="post">
+                                            {% csrf_token %}
+                                            <script src="https://checkout.flutterwave.com/v3.js"></script>
+                                            <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
+                                            <p></p>
+                                            <p>Only complete Order after payment is made</p>
+                                            <a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" >Complete Order</button></a>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                                <div class="ps-block--checkout-order">
+                                    <div class="ps-block__content">
+                                        <figure>
+                                            <figcaption><strong>Product</strong><strong>Total</strong></figcaption>
+                                        </figure>
+                                        <figure class="ps-block__items">
+                                            {% for item in order.orderitem_set.all %}
+                                                <a href="#"><strong>{{  item.product.name  }}</strong><span> x {{ item.quantity }}  <small>UGX {{ item.get_final_price }}</small></span></a>
+                                            {% endfor %}
+                                        </figure>
+                                        <!--
+                                        <figure>
+                                            <figcaption><strong>Subtotal</strong><strong>$1259.99</strong></figcaption>
+                                        </figure>
+                                        <figure>
+                                            <figcaption><strong>Shipping</strong><strong>$20.00</strong></figcaption>
+                                        </figure>
+                                        -->
+                                        <figure class="ps-block__total">
+                                            <h3>Total<strong>UGX {{ order.total_price }}</strong></h3>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--
+            <div class="ps-section__content">
+                <form class="ps-form--checkout"  method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12  ">
+                            <div class="ps-form__total">
+                                <h3 class="ps-form__heading">Your Order</h3>
+                                <div class="content">
+                                    <div class="ps-block--checkout-total">
+                                        <div class="ps-block__header">
+                                            <p>Product</p>
+                                            <p>Total</p>
+                                        </div>
+                                        <div class="ps-block__content">
+                                            <table class="table ps-block__products">
+                                                <tbody>
+                                                    {% for item in order.orderitem_set.all %}
+                                                    <tr>
+                                                        <td><a href="#"> {{  item.product.name  }} × {{ item.quantity }}</a>
+                                                            <p>Sold By:<strong>{{ item.product.seller }}</strong></p>
+                                                        </td>
+                                                        <td>UGX {{ item.get_final_price }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <h4 class="ps-block__title">Subtotal <span>UGX {{ order.total_price }}</span></h4>
+                                            <div class="ps-block__shippings">
+                                                <figure>
+                                                    <h4>YOUNG SHOP Shipping</h4>
+                                                    <p>Free shipping</p><a href="#"> MVMTH Classical Leather Watch In Black ×1</a>
+                                                </figure>
+                                                <figure>
+                                                    <h4>ROBERT’S STORE Shipping</h4>
+                                                    <p>Free shipping</p><a href="#">Apple Macbook Retina Display 12” ×1</a>
+                                                </figure>
+                                            </div>
+                                            <h3>Total <span>$683.49</span></h3>
+                                        </div>
+                                    </div>
+                                    <script src="https://checkout.flutterwave.com/v3.js"></script>
+                                    <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
+                                    <p></p>
+                                    <p>Only complete Order after payment is made</p>
+                                    <a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" >Complete Order</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            -->
+        </div>
+    </div> 
+</div>  
+
+<script>
+  const amount = "{{ amount }}";
+  const name = "{{ order.customer.username }}";
+  const email = "{{ order.customer.email }}";
+  const url = "{% url 'payment' %}"
+
+  function makePayment() {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK-cf914f8aaf732beae663ef0ad36c3462-X",
+      tx_ref: "hooli-tx-1920bbtyt",
+      amount: amount,
+      currency: "UGX",
+      payment_options: "card, mobilemoneyuganda",
+      redirect_url: // specified redirect URL
+        url,
+      meta: {
+        consumer_id: 23,
+        consumer_mac: "92a3-912ba-1192a",
+      },
+      customer: {
+        email: email,
+        phone_number: "08102909304",
+        name: name,
+      },
+      callback: function (data) {
+        console.log(data);
+      },
+      onclose: function() {
+        // close modal
+      },
+      customizations: {
+        title: "Zersh Store",
+        description: "Payment for items in cart",
+        logo: "https://assets.piedpiper.com/logo.png",
+      },
+    });
+  }
+</script>
+
+{% endblock content %}

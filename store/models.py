@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import *
+from user.models import CustomUser, Seller
 from django.urls import reverse
 
 # Create your models here.
@@ -39,6 +39,8 @@ class Product(models.Model):
     sku = models.IntegerField()
     available = models.BooleanField(default=True)
     discount = models.IntegerField(default = 0)
+    description = models.CharField(max_length=120, blank=True, null=True)
+    brand = models.CharField(max_length=120, blank=True, null=True)
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
    
@@ -60,6 +62,7 @@ class Order(models.Model):
     complete = models.BooleanField(default=False, null=True, blank=False)
     transaction_id = models.CharField(max_length=200, null=True)
     billing_details = models.ForeignKey( 'BillingDetails', on_delete = models.SET_NULL, blank=True, null=True)
+    payment = models.ForeignKey( 'Payment', on_delete = models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.customer.username
@@ -98,7 +101,7 @@ class OrderItem(models.Model):
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True)
+        CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
     order = models.ForeignKey(
         Order, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.CharField(max_length=200)
@@ -135,3 +138,13 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.product} review by {self.user.username}'  
+
+
+class Payment(models.Model):
+    customer = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE)
+    amount = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.customer.username
