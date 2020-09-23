@@ -23,6 +23,7 @@
                                     <th>Product</th>
                                     <th>Price</th>
                                     <th>Description</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,7 +31,8 @@
                                 <tr>
                                     <td><a href="{% url 'pdt_detail' product.id %}">{{ product.name }}</a></td>
                                     <td>UGX {{ product.price }}</td>
-                                    <td></td>
+                                    <td>{{ product.description }}</td>
+                                    <td><a href="{% url 'seller_edit_pdt' product.id %}">edit</a></td>
                                 </tr>
                                 {% endfor %}
                                 <!--

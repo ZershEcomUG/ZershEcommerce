@@ -126,3 +126,21 @@ class SellerSettingsView(UpdateView):
         form.save()
         messages.success(self.request, "Your Information was succesfully updated")
         return redirect('seller_dash')    
+
+
+@method_decorator( seller_required , name='dispatch')
+class SellerPdtEditView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'seller_add_pdt.html'
+
+    def get_context_data(self, *args, **kwargs):
+        user = CustomUser.objects.get(username=self.request.user.username)
+        context = super(SellerPdtEditView, self).get_context_data( **kwargs)
+        context['sellers'] = user.seller_set.get(store_name=user.username)
+        return context
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your Product was succesfully updated")
+        return redirect('seller_dash')

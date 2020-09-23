@@ -23,7 +23,7 @@
       data-owl-animate-in="fadeIn" data-owl-animate-out="fadeOut">
       {% for slider in sliders %}
         {% if slider.active == True %}
-          <div class="ps-banner--market-1" data-background="img/slider/home-3/home-banner/1.jpg"><img
+          <div class="ps-banner--market-1" data-background="{{ slider.image.url }}"><img
               src="{{ slider.image.url }}" alt="">
             <div class="ps-banner__content">
               <h5>{{ slider.heading }}</h5>

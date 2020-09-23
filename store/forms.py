@@ -20,6 +20,5 @@ class ProductForm(ModelForm):
         model = Product
         fields = [
             'name', 'price', 'image_182x182', 'image_1200x1200', 'image_600x600',
-            'image_600x600_2', 'image_300x300', 'sku', 'available',  
-            'category', 'seller'
+            'image_600x600_2', 'image_300x300', 'sku', 'available',  'description', 'brand','category', 'seller'
             ]

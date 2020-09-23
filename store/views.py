@@ -244,7 +244,13 @@ class PaymentView(View):
 
         payment.save()
 
-        #assign payment to order 
+        #assign payment to order
+        
+        order_items = order.orderitem_set.all()
+        order_items.update(complete=True)
+        for item in order_items:
+            item.save()
+    
         order.complete = True
         order.payment = payment
         order.save()
@@ -253,3 +259,7 @@ class PaymentView(View):
         return redirect('home')
 
             
+
+def error_404(request, exception):
+    context = {}
+    return render(request, 'error.html', context)
