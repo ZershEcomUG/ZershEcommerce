@@ -105,7 +105,7 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'zershdb',
-        'USER': 'zershAdmin',
+        'USER': 'zershadmin',
         'PASSWORD': 'admin@zersh',
         'HOST': 'localhost',
         'PORT': '',
