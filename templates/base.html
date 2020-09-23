@@ -623,38 +623,34 @@
         <aside class="widget widget_footer">
           <h4 class="widget-title">About Zersh</h4>
           <ul class="ps-list--link">
-              <li><a href="about-us.html">About Us</a></li>
-              <li><a href="newsandblog.html">News and Blog</a></li>
-              <li><a href="careers.html">Careers</a></li>
-              <li><a href="contact-us.html">Contact Us</a></li>
+              <li><a href="{% url 'about' %}">About Us</a></li>
+              <li><a href="{% url 'contact' %}">Contact Us</a></li>
             
           </ul>
       </aside>
       <aside class="widget widget_footer">
         <h4 class="widget-title">Support</h4>
         <ul class="ps-list--link">
-            <li><a href="help-center.html">Help Center</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms-and-conditions.html">Terms & Condition</a></li>
-            <li><a href="return-and-order-policy.html">Return and Order Policy</a></li>
-            <li><a href="return-and-order-policy.html">How to sell on Zersh</a></li>
+            <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+            <li><a href="{% url 'terms' %}">Terms & Condition</a></li>
+            <li><a href="{% url 'order_policy' %}">Return and Order Policy</a></li>
+            <li><a href="{% url 'how_to_sell' %}">How to sell on Zersh</a></li>
         </ul>
     </aside>
     <aside class="widget widget_footer">
       <h4 class="widget-title">My Zersh</h4>
       <ul class="ps-list--link">
-          <li><a href="about-us.html">My Account</a></li>
-          <li><a href="contact-us.html">Become an Affiliate</a></li>
-          <li><a href="#">Sell with Zersh</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'contact' %}">Become an Affiliate</a></li>
+          <li><a href="{% url 'seller_reg' %}">Sell with Zersh</a></li>
           <li><a href="#">Advertise with Us</a></li>
-          <li><a href="contact-us.html">Become an Affiliate</a></li>
       </ul>
   </aside>
       </div>
      
       <div class="ps-footer__copyright">
-        <p>© 2020 Zersh Stores. All Rights Reserved</p>
-        <p><span>We use secure payment gateways you can trust:</span><a href="#"><img src="img/payment-method/1.jpg" alt=""></a><a
+        <p>© 2020 Zersh Stores. All Rights Reserved | Built by <a href="https://theanchor.agency/">Anchor Innovations Limited</a></p>
+        <p><span>We use secure payment gateways you can trust:</span><a href="#"><img src="{% static 'img/payment-method/1.jpg' %}" alt=""></a><a
             href="#"><img src="img/payment-method/2.jpg" alt=""></a><a href="#"><img src="img/payment-method/3.jpg"
               alt=""></a><a href="#"><img src="img/payment-method/4.jpg" alt=""></a><a href="#"><img
               src="img/payment-method/5.jpg" alt=""></a></p>

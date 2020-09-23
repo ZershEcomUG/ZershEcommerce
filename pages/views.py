@@ -24,3 +24,20 @@ class HomePageView(ListView):
         return context
     
 
+class AboutPageView(TemplateView):
+    template_name = 'about-us.html'
+
+class ContactPageView(TemplateView):
+    template_name = 'contact.html'
+
+class PrivacyPageView(TemplateView):
+    template_name = 'privacy-policy.html'
+
+class TermsPageView(TemplateView):
+    template_name = 'terms-and-conditions.html'
+
+class PolicyPageView(TemplateView):
+    template_name = 'return-and-order-policy.html'
+
+class HowToSellPageView(TemplateView):
+    template_name = 'become-a-vendor.html'

@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <div class="ps-page--single">
         <div class="ps-breadcrumb">
             <div class="container">
@@ -7,11 +10,9 @@
                 </ul>
             </div>
         </div>
-        <div class="ps-vendor-banner bg--cover" data-background="img/bg/vendor.jpg">
             <div class="container">
-                <h2>Make extra money by selling online with Zersh Stores. We tap into your market</h2><a class="ps-btn ps-btn--lg" href="#">Start Selling</a>
+                <h2>Make extra money by selling online with Zersh Stores. We tap into your market</h2><a class="ps-btn ps-btn--lg" href="{% url 'seller_reg' %}">Start Selling</a>
             </div>
-        </div>
         <div class="ps-section--vendor ps-vendor-about">
             <div class="container">
                 <div class="ps-section__header">
@@ -215,14 +216,11 @@
                     </div>
                 </div>
                 <div class="ps-section__footer">
-                    <p>It's time to start making money with us!</p><a class="ps-btn" href="#">Start Selling</a>
+                    <p>It's time to start making money with us!</p><a class="ps-btn" href="{% url 'seller_reg' %}">Start Selling</a>
                 </div>
             </div>
         </div>
-        <div class="ps-vendor-banner bg--cover" data-background="img/bg/vendor.jpg">
-            <div class="container">
-                <h2>Are you interested in becoming a Zersh affiliate?</h2><a class="ps-btn ps-btn--lg" href="#">Learn more</a>
-            </div>
-        </div>
+        
     </div>
-   
+
+{% endblock content %}
