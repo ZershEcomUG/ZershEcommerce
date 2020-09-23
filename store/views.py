@@ -11,12 +11,30 @@ from .models import *
 #from djangorave.models import PaymentTypeModel
 
 # Create your views here.
+class CatDetailView(DetailView):
+    model = Category
+    template_name = 'listing.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CatDetailView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.all().order_by('?')
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
+        return context
+
+
 class ListingPageView(ListView):
     model = Product
     template_name = 'listing.html'
 
 class SubCatDetailView(DetailView):
-    pass
+    model = SubCategory
+    template_name = 'listing2.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SubCatDetailView, self).get_context_data( **kwargs)
+        context['products'] = Product.objects.all().order_by('?')
+        context['pdts'] = Product.objects.all().order_by('?')[:3]
+        return context
 
 class ProductDetailView( DetailView):
     model = Product

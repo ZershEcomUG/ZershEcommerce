@@ -17,6 +17,7 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['products'] = self.pdt.order_by('?')[:6]
+        context['pdts'] = self.pdt.order_by('?')[:12]
         context['categories'] = self.cat.order_by('?')[:5]
         context['subcategories'] = self.queryset
         context['sliders'] = self.sliderImgs[:3]
