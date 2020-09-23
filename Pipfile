@@ -11,9 +11,8 @@ pillow = "*"
 mysqlclient = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
-djangorave = "*"
-django-ravepay = "*"
-ravepay = {editable = true,git = "https://github.com/gbozee/django-ravepay.git",ref = "master"}
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"
