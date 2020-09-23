@@ -104,7 +104,7 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'zershDB',
+        'NAME': 'zershdb',
         'USER': 'zershAdmin',
         'PASSWORD': 'admin@zersh',
         'HOST': 'localhost',
