@@ -191,8 +191,7 @@
           </form>
         </div>
         <div class="header__content-right">
-          <div class="header__actions"><a class="header__extra" href="#"><i
-                class="icon-heart"></i><span><i>0</i></span></a>
+          <div class="header__actions">
             <div class="ps-cart--mini"><a class="header__extra" href="{% url 'cart' %}"><i
                   class="icon-bag2"></i><span><i>{{ request.user|cart_item_counter }}</i></span></a>
               
@@ -319,27 +318,22 @@
         </div>
         <div class="navigation__right">
           <ul class="menu">
-            <li class="current-menu-item menu-item-has-children"><a href="index.html">Home</a><span
+            <li class="current-menu-item menu-item-has-children"><a href="{% url 'home' %}">Home</a><span
                 class="sub-toggle"></span>
               
-            </li>
-            <li class="menu-item-has-children has-mega-menu"><a href="shop-default.html">Shop</a><span
-                class="sub-toggle"></span>
             </li>
             <li class="menu-item-has-children has-mega-menu"><a href="#">Pages</a><span class="sub-toggle"></span>
               <div class="mega-menu">
                 <div class="mega-menu__column">
                   <h4>Basic Page<span class="sub-toggle"></span></h4>
                   <ul class="mega-menu__list">
-                    <li><a href="about-us.html">About Us</a>
+                    <li><a href="{% url 'about' %}">About Us</a>
                     </li>
-                    <li><a href="contact-us.html">Contact</a>
+                    <li><a href="{% url 'contact' %}">Contact</a>
                     </li>
-                    <li><a href="faqs.html">Faqs</a>
+                    <li><a href="{% url 'terms' %}">Terms & Condition</a>
                     </li>
-                    <li><a href="comming-soon.html">Comming Soon</a>
-                    </li>
-                    <li><a href="404-page.html">404 Page</a>
+                    <li><a href="{% url 'how_to_sell' %}">How to sell on Zersh</a>
                     </li>
                   </ul>
                 </div>
@@ -532,10 +526,7 @@
     </div>
     <div class="ps-panel__content">
       <ul class="menu--mobile">
-        <li class="current-menu-item menu-item-has-children"><a href="index.html">Home</a><span
-            class="sub-toggle"></span>
-        </li>
-        <li class="menu-item-has-children has-mega-menu"><a href="shop-default.html">Shop</a><span
+        <li class="current-menu-item menu-item-has-children"><a href="{% url 'home' %}">Home</a><span
             class="sub-toggle"></span>
         </li>
         <li class="menu-item-has-children has-mega-menu"><a href="">Pages</a><span class="sub-toggle"></span>
@@ -543,15 +534,13 @@
             <div class="mega-menu__column">
               <h4>Basic Page<span class="sub-toggle"></span></h4>
               <ul class="mega-menu__list">
-                <li><a href="about-us.html">About Us</a>
+                <li><a href="{% url 'about' %}">About Us</a>
                 </li>
-                <li><a href="contact-us.html">Contact</a>
+                <li><a href="{% url 'contact' %}">Contact</a>
                 </li>
-                <li><a href="faqs.html">Faqs</a>
+                <li><a href="{% url 'terms' %}">Terms & Condition</a>
                 </li>
-                <li><a href="comming-soon.html">Comming Soon</a>
-                </li>
-                <li><a href="404-page.html">404 Page</a>
+                <li><a href="{% url 'how_to_sell' %}">How to sell on Zersh</a>
                 </li>
               </ul>
             </div>
