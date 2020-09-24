@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'eq)v7)#87b)+a_^ykuldxo0i7j+x0zpz)c7)iwgu+et7hc%=^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.zershstores.com', '167.172.107.9']
 
@@ -92,6 +92,7 @@ WSGI_APPLICATION = 'zershecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+"""
 if DEBUG:
     DATABASES = {
         'default': {
@@ -101,7 +102,8 @@ if DEBUG:
     }
 
 else:
-    DATABASES = {
+"""    
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'zershdb',
