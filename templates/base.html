@@ -619,9 +619,10 @@
 
 
   <!--Footer-->
+  <!--
   <div class="ps-newsletter">
     <div class="container">
-        <form class="ps-form--newsletter" action="{% url 'home' %}" method="post">
+        <form class="ps-form--newsletter" action="{% url" method="post">
             {% csrf_token %}
             <div class="row">
                 <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12 ">
@@ -642,6 +643,7 @@
         </form>
     </div>
   </div>
+  -->
   <footer class="ps-footer">
     <div class="container">
       <div class="ps-footer__widgets">
