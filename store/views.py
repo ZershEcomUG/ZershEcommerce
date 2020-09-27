@@ -259,7 +259,8 @@ class PaymentView(View):
         return redirect('home')
 
             
-
+"""
 def error_404(request, exception):
     context = {}
     return render(request, 'error.html', context)
+"""    

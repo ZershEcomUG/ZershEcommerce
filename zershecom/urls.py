@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import handler404
+#from django.conf.urls import handler404
 
 
 urlpatterns = [
@@ -32,5 +32,5 @@ urlpatterns = [
 
 
 #error handlers
-handler404 = 'store.views.error_404'
+#handler404 = 'store.views.error_404'
 #handler500 = 'store.views.my_custom_error_view'
