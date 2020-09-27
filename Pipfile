@@ -14,6 +14,8 @@ django-crispy-forms = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
+python-dotenv = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.8"
