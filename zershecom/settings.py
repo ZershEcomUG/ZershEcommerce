@@ -32,7 +32,7 @@ SECRET_KEY = 'eq)v7)#87b)+a_^ykuldxo0i7j+x0zpz)c7)iwgu+et7hc%=^)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['zersh.shop', 'www.zersh.shop', '*']
 
 
 # Application definition
