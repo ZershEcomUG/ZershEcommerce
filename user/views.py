@@ -60,11 +60,11 @@ class SellerDashBoardView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
-        user1 = user.seller_set.get(store_name=user.username)
+        user1 = user.seller_set.all()[0]
         context = super(SellerDashBoardView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')[:11]
         context['orders'] = OrderItem.objects.all().order_by('-id')
-        context['sellers'] = user.seller_set.get(store_name=user.username)
+        context['sellers'] = user1
         return context
 
 @method_decorator( seller_required , name='dispatch')
@@ -75,8 +75,9 @@ class SellerProductAddView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
+        user1 = user.seller_set.all()[0]
         context = super(SellerProductAddView, self).get_context_data( **kwargs)
-        context['sellers'] = user.seller_set.get(store_name=user.username)
+        context['sellers'] = user1
         return context
 
     def form_valid(self, form):
@@ -92,10 +93,10 @@ class SellerProductsView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
-        user1 = user.seller_set.get(store_name=user.username)
+        user1 = user.seller_set.all()[0]
         context = super(SellerProductsView, self).get_context_data( **kwargs)
         context['products'] = Product.objects.filter(seller=user1).order_by('-id')
-        context['sellers'] = user.seller_set.get(store_name=user.username)
+        context['sellers'] = user1
         return context
 
 
@@ -106,9 +107,10 @@ class SellerOrdersView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
+        user1 = user.seller_set.all()[0]
         context = super(SellerOrdersView, self).get_context_data( **kwargs)
         context['orders'] = OrderItem.objects.all().order_by('-id')
-        context['sellers'] = user.seller_set.get(store_name=user.username)
+        context['sellers'] = user1
         return context        
 
 
@@ -136,8 +138,9 @@ class SellerPdtEditView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
+        user1 = user.seller_set.all()[0]
         context = super(SellerPdtEditView, self).get_context_data( **kwargs)
-        context['sellers'] = user.seller_set.get(store_name=user.username)
+        context['sellers'] = user1
         return context
 
     def form_valid(self, form):
