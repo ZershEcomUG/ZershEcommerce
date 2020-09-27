@@ -30,7 +30,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = 'eq)v7)#87b)+a_^ykuldxo0i7j+x0zpz)c7)iwgu+et7hc%=^)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True
 
 ALLOWED_HOSTS = ['dfb-zersh.herokuapp.com', 'zersh.shop', 'www.zersh.shop']
 
