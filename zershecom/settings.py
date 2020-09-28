@@ -19,9 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # This is new:
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+#dotenv_file = os.path.join(BASE_DIR, ".env")
+#if os.path.isfile(dotenv_file):
+#    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -238,7 +238,7 @@ LOGGING = {
     },
 }
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+#options = DATABASES['default'].get('OPTIONS', {})
+#options.pop('sslmode', None)
