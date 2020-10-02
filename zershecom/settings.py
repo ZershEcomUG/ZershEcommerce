@@ -219,10 +219,6 @@ RAVE_SANDBOX_SECRET_KEY = "FLWSECK-b1288e0ffb30b1f8da4dc76f2eb5d23e-X"
 RAVE_SANDBOX = True
 """
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 LOGGING = {
@@ -252,3 +248,8 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'YOUR_API_SECRET',
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
