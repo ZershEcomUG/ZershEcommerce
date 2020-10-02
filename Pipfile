@@ -16,6 +16,8 @@ psycopg2-binary = "*"
 whitenoise = "*"
 python-dotenv = "*"
 django-heroku = "*"
+dj3-cloudinary-storage = "*"
+cloudinary = "~=1.21.0"
 
 [requires]
 python_version = "3.8"

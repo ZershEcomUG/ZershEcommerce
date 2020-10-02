@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # This is new:
-#dotenv_file = os.path.join(BASE_DIR, ".env")
-#if os.path.isfile(dotenv_file):
-#    dotenv.load_dotenv(dotenv_file)
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic', 
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'cloudinary',
     #'djangorave',
 
     #providors
@@ -103,7 +105,7 @@ WSGI_APPLICATION = 'zershecom.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-
+"""
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -114,7 +116,7 @@ DATABASES = {
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-"""
+
 """    
 DATABASES = {
     'default': {
@@ -239,7 +241,14 @@ LOGGING = {
     },
 }
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
 
-#options = DATABASES['default'].get('OPTIONS', {})
-#options.pop('sslmode', None)
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'YOUR_CLOUD_NAME',
+    'API_KEY': 'YOUR_API_KEY',
+    'API_SECRET': 'YOUR_API_SECRET',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
