@@ -84,7 +84,7 @@
             <div class="menu__toggle"><i class="icon-menu"></i><span> Shop by Category</span></div>
             <div class="menu__content">
               <ul class="menu--dropdown">
-                {% for cat in categories  %}
+                {% for cat in cates  %}
                   <li class="menu-item-has-children has-mega-menu"><a href="{% url 'cat_detail' cat.id %}">{{ cat.name }}</a><span
                     class="sub-toggle"></span>
                     <div class="mega-menu">
@@ -99,7 +99,7 @@
                       </div>
                     </div>
                   </li>
-                  {% endfor %}
+                {% endfor %}
               </ul>
             </div>
           </div><a class="ps-logo" href="{% url 'home' %}"><img  src="{% static 'img/zers1.png' %}" alt=""></a>
