@@ -247,7 +247,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': 'YOUR_API_KEY',
     'API_SECRET': 'YOUR_API_SECRET',
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
