@@ -17,7 +17,7 @@ whitenoise = "*"
 python-dotenv = "*"
 django-heroku = "*"
 dj3-cloudinary-storage = "*"
-cloudinary = "~=1.21.0"
+cloudinary = "*"
 
 [requires]
 python_version = "3.8"
