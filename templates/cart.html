@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="ps-page--simple">
@@ -61,59 +62,52 @@
                 <div class="ps-section__cart-actions"><a class="ps-btn" href="{% url 'home' %}"><i class="icon-arrow-left"></i> Back to Shop</a><a class="ps-btn ps-btn--outline" href="{% url 'cart' %}"><i class="icon-sync"></i> Update cart</a></div>
             </div>
             <div class="ps-section__footer">
-                <div class="row">
-                    <!--
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                        <figure>
-                            <figcaption>Coupon Discount</figcaption>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <button class="ps-btn ps-btn--outline">Apply</button>
-                            </div>
-                        </figure>
+                <form method="POST" >
+                    {% csrf_token %} 
+                    <div class="row">
+                        <!--
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                            <figure>
+                                <figcaption>Coupon Discount</figcaption>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <button class="ps-btn ps-btn--outline">Apply</button>
+                                </div>
+                            </figure>
+                        </div>
+                        -->
+                        
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                            <figure>
+                                <figcaption>Delivery Option</figcaption>
+                                <div class="form-group">
+                                    {{ form|crispy }}
+                                </div>
+                                
+                            </figure>
+                        </div>
+                        
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+                            <div class="ps-block--shopping-total">
+                                <div class="ps-block__header">
+                                    <p>Subtotal <span> UGX {{ object.total_price }}</span></p>
+                                </div>
+                                <div class="ps-block__content">
+                                    <ul class="ps-block__product">
+                                        {% for orderitem in object.orderitem_set.all %}
+                                        <li><span class="ps-block__shop">{{  orderitem.product.seller }}</span><a href="#"> {{ orderitem.product.name  }} × {{ orderitem.quantity }}</a></span></li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h3>Total <span>UGX {{ object.total_price }}</span></h3>
+                                </div>
+                            </div><button type="submit" class="ps-btn ps-btn--fullwidth" >Proceed to checkout</button>
+                        </div>
+
                     </div>
-                    -->
-                    <!--
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                        <figure>
-                            <figcaption>Calculate shipping</figcaption>
-                            <div class="form-group">
-                                <select class="ps-select">
-                                    <option value="1">America</option>
-                                    <option value="2">Italia</option>
-                                    <option value="3">Vietnam</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Town/City">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Postcode/Zip">
-                            </div>
-                            <div class="form-group">
-                                <button class="ps-btn ps-btn--outline">Update</button>
-                            </div>
-                        </figure>
-                    </div>
-                    -->
-                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ">
-                        <div class="ps-block--shopping-total">
-                            <div class="ps-block__header">
-                                <p>Subtotal <span> UGX {{ object.total_price }}</span></p>
-                            </div>
-                            <div class="ps-block__content">
-                                <ul class="ps-block__product">
-                                    {% for orderitem in object.orderitem_set.all %}
-                                    <li><span class="ps-block__shop">{{  orderitem.product.seller }}</span><a href="#"> {{ orderitem.product.name  }} × {{ orderitem.quantity }}</a></span></li>
-                                    {% endfor %}
-                                </ul>
-                                <h3>Total <span>UGX {{ object.total_price }}</span></h3>
-                            </div>
-                        </div><a class="ps-btn ps-btn--fullwidth" href="{% url 'checkout' %}">Proceed to checkout</a>
-                    </div>
-                </div>
+                
+                </form>
             </div>
         </div>
     </div>

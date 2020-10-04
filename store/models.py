@@ -1,6 +1,8 @@
 from django.db import models
 from user.models import CustomUser, Seller
 from django.urls import reverse
+from model_utils import Choices
+
 
 # Create your models here.
 
@@ -63,6 +65,7 @@ class Order(models.Model):
     transaction_id = models.CharField(max_length=200, null=True)
     billing_details = models.ForeignKey( 'BillingDetails', on_delete = models.SET_NULL, blank=True, null=True)
     payment = models.ForeignKey( 'Payment', on_delete = models.SET_NULL, blank=True, null=True)
+    delivery = models.ForeignKey( 'Delivery', on_delete = models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.customer.username
@@ -71,7 +74,15 @@ class Order(models.Model):
         total = 0
         for orderitem in self.orderitem_set.all():
             total += orderitem.get_final_price()
-        return total    
+        return total   
+
+    def total_price_deliv(self):
+        total = self.total_price() + 5000
+        return total
+
+    def total_price_deliv_pickup(self):
+        total = self.total_price() + 2000
+        return total         
 
 class OrderItem(models.Model):
     customer = models.ForeignKey(
@@ -144,7 +155,29 @@ class Payment(models.Model):
     customer = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE)
     amount = models.FloatField()
+    pay_on_delivery = models.BooleanField(default=False , null=True, blank=True)  
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.customer.username
+
+
+class Delivery(models.Model):
+    STATUS = Choices(
+        ('doorstep', ('delivery to doorstep')),
+        ('pickup', ('delivery to pick up point')),
+    )
+   # [..]
+    option = models.CharField(
+       max_length=32,
+       choices=STATUS,
+       default=STATUS.doorstep,
+    )   
+
+class Pickup(models.Model):
+    pickup_location = models.CharField(max_length=122)
+    active = models.BooleanField(default=False)  
+
+    def __str__(self):
+        return self.pickup_location 
+        

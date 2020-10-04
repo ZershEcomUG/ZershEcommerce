@@ -18,6 +18,7 @@ python-dotenv = "*"
 django-heroku = "*"
 dj3-cloudinary-storage = "*"
 cloudinary = "*"
+django-model-utils = "*"
 
 [requires]
 python_version = "3.8"

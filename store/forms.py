@@ -1,6 +1,6 @@
 from django import forms
 from user.models import CustomUser, Seller
-from .models import Product
+from .models import *
 from django.forms import ModelForm
 
 
@@ -22,3 +22,14 @@ class ProductForm(ModelForm):
             'name', 'price', 'image_182x182', 'image_1200x1200', 'image_600x600',
             'image_600x600_2', 'image_300x300', 'sku', 'available',  'description', 'brand','category', 'seller'
             ]
+
+class DeliveryForm(ModelForm):
+    class Meta:
+        model = Delivery
+        fields = [ 'option' ]
+
+
+class PaymentForm(ModelForm):
+    class Meta:
+        model = Payment
+        fields = [ 'pay_on_delivery' ]
