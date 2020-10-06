@@ -266,7 +266,7 @@
     <div class="ps-panel__content">
       <ul class="menu--mobile">
 
-        {% for cat in categories  %}
+        {% for cat in cates  %}
         <li class="menu-item-has-children has-mega-menu"><a href="{% url 'cat_detail' cat.id %}">{{ cat.name }}</a><span
           class="sub-toggle"></span>
           <div class="mega-menu">
@@ -282,6 +282,7 @@
           </div>
         </li>
         {% endfor %}
+        
       </ul>
     </div>
   </div>
@@ -397,7 +398,7 @@
         <ul class="ps-list--link">
             <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
             <li><a href="{% url 'terms' %}">Terms & Condition</a></li>
-            <li><a href="{% url 'order_policy' %}">Return and Order Policy</a></li>
+            <li><a href="{% url 'order_policy' %}">Return & Order <br> Policy</a></li>
             <li><a href="{% url 'how_to_sell' %}">How to sell on Zersh</a></li>
         </ul>
     </aside>
