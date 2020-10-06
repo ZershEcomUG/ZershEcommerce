@@ -156,6 +156,7 @@ class Payment(models.Model):
         CustomUser, on_delete=models.CASCADE)
     amount = models.FloatField()
     pay_on_delivery = models.BooleanField(default=False , null=True, blank=True)  
+    complete = models.BooleanField(default=False , null=True, blank=True)  
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

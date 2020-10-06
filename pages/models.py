@@ -4,7 +4,7 @@ from store.models import Category, SubCategory
 # Create your models here.
 
 class Slider(models.Model):
-    image = models.ImageField(upload_to= 'slider_imgs')
+    image_1920x358 = models.ImageField(upload_to= 'slider_imgs')
     active = models.BooleanField(default = False)
     heading =  models.CharField(max_length=200, blank=True, null=True)
     description =  models.CharField(max_length=200, blank=True, null=True)
@@ -18,7 +18,7 @@ class Slider(models.Model):
         return str(self.image)
 
 class PromotionImg(models.Model):
-    image = models.ImageField(upload_to= 'header_imgs')
+    image_379x188 = models.ImageField(upload_to= 'header_imgs')
     active = models.BooleanField(default = False)
 
     def __str__(self):
