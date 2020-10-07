@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormMixin
 from django.views.generic import ListView, DetailView, View, TemplateView
-from .forms import CheckoutForm, ReviewForm
+from .forms import *
 from django.contrib import messages
 from .models import *
 from django.db.models import Q
@@ -84,8 +84,10 @@ class CartView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(customer=self.request.user, complete=False)
+            form = DeliveryForm
             context = {
                 'object': order,
+                'form': form,
             }
             return render(self.request, 'cart.html', context)
         except ObjectDoesNotExist:
@@ -93,6 +95,18 @@ class CartView(LoginRequiredMixin, View):
             return redirect("/")
     
 
+    def post(self, *args, **kwargs):
+        form = DeliveryForm(self.request.POST or None)
+        order = Order.objects.get(customer=self.request.user, complete=False)   
+        if form.is_valid():
+            option = form.cleaned_data.get('option')
+            delivery_option = Delivery(
+                option = option,
+            )
+            delivery_option.save() 
+            order.delivery = delivery_option
+            order.save()
+            return redirect('checkout')  
 
 
 #Function to handle adding items to cart or 
@@ -172,13 +186,38 @@ class CheckoutView(View):
     def get(self, *args, **kwargs):
         form = CheckoutForm
         order = Order.objects.get(customer=self.request.user, complete=False)
-        amount = order.total_price()
-        context = {
-            'order':order,
-            'amount':amount,
-            'form':form
-        }
-        return render(self.request, 'checkout.html', context )
+        if order.delivery.option == order.delivery.STATUS.doorstep:
+            delivery = order.delivery
+            amount = order.total_price()
+            amnt = 5000
+            text = 'Doorstep Delivery around Kampala'
+            total = order.total_price_deliv()
+            context = {
+                'order':order,
+                'amount':amount,
+                'delivery': delivery,
+                'amnt': amnt,
+                'text': text,
+                'total': total,
+                'form':form
+            }
+            return render(self.request, 'checkout.html', context )
+        else:
+            delivery = order.delivery
+            amount = order.total_price()
+            amnt = 2000
+            text = 'Delivery at pick up point'
+            total = order.total_price_deliv_pickup()
+            context = {
+                'order':order,
+                'amount':amount,
+                'delivery': delivery,
+                'amnt': amnt,
+                'text': text,
+                'total': total,
+                'form':form
+            }
+            return render(self.request, 'checkout.html', context )
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
@@ -223,43 +262,78 @@ class PaymentView(View):
         ).first()
         """
         order = Order.objects.get(customer=self.request.user, complete=False)
-        amount = order.total_price()
-        context = {
-            'order':order,
-            'amount':amount,
-
-        }
+        form = PaymentForm
+        if order.delivery.option == order.delivery.STATUS.doorstep:
+            delivery = order.delivery
+            amount = order.total_price()
+            amnt = 5000
+            text = 'Doorstep Delivery around Kampala'
+            total = order.total_price_deliv()
+            context = {
+                'order':order,
+                'amount':amount,
+                'delivery': delivery,
+                'amnt': amnt,
+                'text': text,
+                'total': total,
+                'form': form,
+            }
         
-        return render(self.request, 'payment.html', context )
+            return render(self.request, 'payment.html', context )
+
+        else:
+            delivery = order.delivery
+            amount = order.total_price()
+            amnt = 2000
+            text = 'Delivery at pick up point'
+            total = order.total_price_deliv_pickup()
+            pickup = Pickup.objects.get(active=True)
+            context = {
+                'order':order,
+                'amount':amount,
+                'delivery': delivery,
+                'amnt': amnt,
+                'text': text,
+                'total': total,
+                'pickup': pickup,
+                'form': form,
+            }
+        
+            return render(self.request, 'payment.html', context )
+
+
 
     def post(self, *args, **kwargs):
         order = Order.objects.get(customer=self.request.user, complete=False)
         amount = order.total_price()
+        form = PaymentForm(self.request.POST or None)
+        if form.is_valid():
+            pay_on_delivery = form.cleaned_data.get('pay_on_delivery')
+            payment = Payment(
+                customer=self.request.user,
+                amount=amount,
+                pay_on_delivery=pay_on_delivery
+            )
+
+            payment.save()
+
+            #assign payment to order
+            
+            order_items = order.orderitem_set.all()
+            order_items.update(complete=True)
+            for item in order_items:
+                item.save()
         
-        #create payment
-        payment = Payment(
-            customer=self.request.user,
-            amount=amount,
-        )
+            order.complete = True
+            order.payment = payment
+            order.save()
 
-        payment.save()
-
-        #assign payment to order
-        
-        order_items = order.orderitem_set.all()
-        order_items.update(complete=True)
-        for item in order_items:
-            item.save()
-    
-        order.complete = True
-        order.payment = payment
-        order.save()
-
-        messages.success(self.request, "Your order was succesful")
-        return redirect('home')
+            messages.success(self.request, "Your order was succesful")
+            return redirect('home')
 
             
-
+"""
 def error_404(request, exception):
     context = {}
     return render(request, 'error.html', context)
+"""    

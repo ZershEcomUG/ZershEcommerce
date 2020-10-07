@@ -5,4 +5,4 @@ def categories_processor(request):
     categories = Category.objects.all()
     ads = Ad.objects.all()
     # then return your variables
-    return {'categories': categories, 'ads':ads}
+    return {'cates': categories, 'ads':ads}

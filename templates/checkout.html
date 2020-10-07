@@ -58,13 +58,15 @@
                                                     <h4>YOUNG SHOP Shipping</h4>
                                                     <p>Free shipping</p><a href="#"> MVMTH Classical Leather Watch In Black ×1</a>
                                                 </figure>
-                                                <figure>
-                                                    <h4>ROBERT’S STORE Shipping</h4>
-                                                    <p>Free shipping</p><a href="#">Apple Macbook Retina Display 12” ×1</a>
-                                                </figure>
                                                 -->
+                                                {% if delivery  %}
+                                                    <figure>
+                                                        <h4>{{ text }}</h4>
+                                                        <h4><span> UGX {{ amnt }} </span></h4>
+                                                    </figure>
+                                                {% endif %}
                                             </div>
-                                            <h3>Total <span>UGX {{ order.total_price }}</span></h3>
+                                            <h3>Total <span>UGX {{ total }}</span></h3>
                                         </div>
                                     </div><a  href="checkout.html"><button class="ps-btn ps-btn--fullwidth" style="border: none;" type="submit">Proceed to checkout</button></a>
                                 </div>

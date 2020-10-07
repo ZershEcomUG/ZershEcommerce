@@ -21,6 +21,7 @@ class HomePageView(ListView):
         context['products'] = self.pdt.order_by('?')[:6]
         context['pdts'] = self.pdt.order_by('?')[:12]
         context['categories'] = self.cat.order_by('?')[:5]
+        context['cates'] = self.cat.order_by('?')
         context['subcategories'] = self.queryset
         context['sliders'] = self.sliderImgs[:3]
         context['promopics'] = self.promoImg[:3]
@@ -30,11 +31,20 @@ class HomePageView(ListView):
 class AboutPageView(TemplateView):
     template_name = 'about-us.html'
 
+    cat = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutPageView, self).get_context_data(**kwargs)
+        context['cates'] = self.cat.order_by('?')
+        return context
+
 class ContactPageView(View):
     def get(self, *args, **kwargs):
         form = ContactForm
+        cates = Category.objects.all()
         context = {
-            'form':form            
+            'form':form,    
+            'cates':cates,        
         }
         return render(self.request, 'contact.html', context )
 
@@ -57,11 +67,41 @@ class ContactPageView(View):
 class PrivacyPageView(TemplateView):
     template_name = 'privacy-policy.html'
 
+    cat = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(PrivacyPageView, self).get_context_data(**kwargs)
+        context['cates'] = self.cat.order_by('?')
+        return context
+
 class TermsPageView(TemplateView):
     template_name = 'terms-and-conditions.html'
+
+    cat = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(TermsPageView, self).get_context_data(**kwargs)
+        context['cates'] = self.cat.order_by('?')
+        return context
 
 class PolicyPageView(TemplateView):
     template_name = 'return-and-order-policy.html'
 
+    cat = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(PolicyPageView, self).get_context_data(**kwargs)
+        context['cates'] = self.cat.order_by('?')
+        return context
+
 class HowToSellPageView(TemplateView):
     template_name = 'become-a-vendor.html'
+
+    cat = Category.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(HowToSellPageView, self).get_context_data(**kwargs)
+        context['cates'] = self.cat.order_by('?')
+        return context
+
+    

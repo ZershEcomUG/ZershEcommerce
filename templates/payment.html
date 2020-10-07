@@ -21,7 +21,11 @@
                                             <p><a href="#">{{ order.customer.email  }}</a></p><a href="#"></a>
                                         </figure>
                                         <figure><small>Ship to</small>
-                                            <p>{{ order.billing_details.building_apartment_name }}, {{ order.billing_details.address }}, {{ order.billing_details.location }}</p><a href="#"></a>
+                                            {% if pickup %}
+                                                <p>{{ pickup.pickup_location }}</p>
+                                            {% else %}
+                                                <p>{{ order.billing_details.building_apartment_name }}, {{ order.billing_details.address }}, {{ order.billing_details.location }}</p><a href="#"></a>
+                                            {% endif %}
                                         </figure>
                                     </div>
                                     <!--
@@ -34,9 +38,15 @@
                                         <form action="" method="post">
                                             {% csrf_token %}
                                             <script src="https://checkout.flutterwave.com/v3.js"></script>
+                                            <p>To pay with Mobile Money(MTN or Airtel) or Visa :</p>
                                             <button type="button" class="ps-btn ps-btn" style="border: none;" onClick="makePayment()">Pay Now</button>
-                                            <p></p>
-                                            <p>Only complete Order after payment is made</p>
+                                            <p> </p>
+                                            <div class="form-group">
+                                                <p> To pay on delivery Select Yes below: </p>
+                                                {{ form|crispy }}
+                                            </div>
+                                            
+                                            <p>Only complete Order after payment is made or pay on delivery is selected</p>
                                             <a  href="#"><button class="ps-btn ps-btn" style="border: none;" type="submit" >Complete Order</button></a>
                                         </form>
                                     </div>
@@ -54,16 +64,17 @@
                                                 <a href="#"><strong>{{  item.product.name  }}</strong><span> x {{ item.quantity }}  <small>UGX {{ item.get_final_price }}</small></span></a>
                                             {% endfor %}
                                         </figure>
-                                        <!--
+                                        
                                         <figure>
-                                            <figcaption><strong>Subtotal</strong><strong>$1259.99</strong></figcaption>
+                                            <figcaption><strong>Subtotal</strong><strong>UGX {{ amount }}</strong></figcaption>
                                         </figure>
+                                        
                                         <figure>
-                                            <figcaption><strong>Shipping</strong><strong>$20.00</strong></figcaption>
+                                            <figcaption><strong>{{ text }}</strong><strong>UGX {{ amnt }}</strong></figcaption>
                                         </figure>
-                                        -->
+
                                         <figure class="ps-block__total">
-                                            <h3>Total<strong>UGX {{ order.total_price }}</strong></h3>
+                                            <h3>Total<strong>UGX {{ total }}</strong></h3>
                                         </figure>
                                     </div>
                                 </div>
@@ -130,7 +141,7 @@
 </div>  
 
 <script>
-  const amount = "{{ amount }}";
+  const amount = "{{ total }}";
   const name = "{{ order.customer.username }}";
   const email = "{{ order.customer.email }}";
   const url = "{% url 'payment' %}"

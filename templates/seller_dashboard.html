@@ -52,7 +52,7 @@
                 <div class="ps-block__content">
                     <div class="table-responsive">
                         {% for item in orders %}
-                            {% if item.product.seller.store_name == user.username and item.order.complete == True %}
+                            {% if item.product.seller.user.username == user.username and item.order.complete == True %}
                                 <h5>{{ item.order.date_ordered }}</h5>
                                 <table class="table ps-table ps-table--vendor">
                                     <thead>

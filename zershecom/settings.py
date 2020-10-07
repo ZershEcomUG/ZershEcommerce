@@ -9,12 +9,20 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
 import os
+import dj_database_url
+import dotenv
+import django_heroku
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
+# This is new:
+dotenv_file = os.path.join(BASE_DIR, ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -25,7 +33,7 @@ SECRET_KEY = 'eq)v7)#87b)+a_^ykuldxo0i7j+x0zpz)c7)iwgu+et7hc%=^)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['167.172.107.9']
+ALLOWED_HOSTS = ['dfb-zersh.herokuapp.com', 'zersh.shop', 'www.zersh.shop', '*']
 
 
 # Application definition
@@ -40,9 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.messages', 
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'cloudinary_storage',
+    'cloudinary',
 
     # 3rd party apps
     'crispy_forms',
@@ -60,6 +71,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -92,16 +104,19 @@ WSGI_APPLICATION = 'zershecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 """
-if DEBUG:
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+"""    
 
-else:
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
 """    
 DATABASES = {
     'default': {
@@ -113,6 +128,7 @@ DATABASES = {
         'PORT': '',
     }
 }
+"""
 
 
 # Password validation
@@ -151,10 +167,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_dev')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
@@ -186,7 +198,9 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 #ACCOUNT_UNIQUE_EMAIL = True
 
 # email config
@@ -206,4 +220,39 @@ RAVE_SANDBOX_PUBLIC_KEY = "FLWPUBK-b79f1bcfe93c4001f53a595c083dee1c-X"
 RAVE_SANDBOX_SECRET_KEY = "FLWSECK-b1288e0ffb30b1f8da4dc76f2eb5d23e-X"
 RAVE_SANDBOX = True
 """
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
+
+django_heroku.settings(locals())
+
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hgdutrdw7',
+    'API_KEY': '457211137331172',
+    'API_SECRET': 'QhQ1qfTGt8r0GIUg-YSWgjT3eRA',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 

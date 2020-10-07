@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <div class="ps-page--single">
@@ -23,7 +24,7 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                             <div class="ps-block--icon-box-2">
-                                <div class="ps-block__thumbnail"><img src="img/icons/vendor-1.png" alt=""></div>
+                                <div class="ps-block__thumbnail"><img src="{% static 'img/icons/vendor-1.png' %}" alt=""></div>
                                 <div class="ps-block__content">
                                     <h4>Free registration and Listing</h4>
                                     <div class="ps-block__desc" data-mh="about-desc">
@@ -34,7 +35,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                             <div class="ps-block--icon-box-2">
-                                <div class="ps-block__thumbnail"><img src="img/icons/vendor-2.png" alt=""></div>
+                                <div class="ps-block__thumbnail"><img src="{% static 'img/icons/vendor-2.png' %}" alt=""></div>
                                 <div class="ps-block__content">
                                     <h4>Marketing and Advertising</h4>
                                     <div class="ps-block__desc" data-mh="about-desc">
@@ -45,7 +46,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                             <div class="ps-block--icon-box-2">
-                                <div class="ps-block__thumbnail"><img src="img/icons/vendor-3.png" alt=""></div>
+                                <div class="ps-block__thumbnail"><img src="{% static 'img/icons/vendor-3.png' %}" alt=""></div>
                                 <div class="ps-block__content">
                                     <h4> 24/7 Support</h4>
                                     <div class="ps-block__desc" data-mh="about-desc">
@@ -73,7 +74,7 @@
                                 <li>All we need from you are required documents, business registration and bank account details.We offer free training on how to run your online business</li>
                             </ul>
                         </div>
-                        <div class="ps-block__right"><img src="img/vendor/milestone-1.png" alt=""></div>
+                        <div class="ps-block__right"><img src="{% static  'img/vendor/milestone-1.png'  %}" alt=""></div>
                         <div class="ps-block__number"><span>1</span></div>
                     </div>
                     <div class="ps-block--vendor-milestone reverse">
@@ -84,7 +85,7 @@
                                 <li>We make the payment and selling process easy for both you and your customer. Enjoy the Zersh experience!</li>
                             </ul>
                         </div>
-                        <div class="ps-block__right"><img src="img/vendor/milestone-2.png" alt=""></div>
+                        <div class="ps-block__right"><img src="{% static 'img/vendor/milestone-2.png'  %}" alt=""></div>
                         <div class="ps-block__number"><span>2</span></div>
                     </div>
                     <div class="ps-block--vendor-milestone">
@@ -95,7 +96,7 @@
                                 <li>We make sure all stakeholders follow the recommended health and safety measures in the delivery process</li>
                             </ul>
                         </div>
-                        <div class="ps-block__right"><img src="img/vendor/milestone-3.png" alt=""></div>
+                        <div class="ps-block__right"><img src="{% static 'img/vendor/milestone-3.png' %}" alt=""></div>
                         <div class="ps-block__number"><span>3</span></div>
                     </div>
                     <div class="ps-block--vendor-milestone reverse">
@@ -106,7 +107,7 @@
                                 <li>You earn exactly 90% off the sale of each product. Now isn't that a good thing?</li>
                             </ul>
                         </div>
-                        <div class="ps-block__right"><img src="img/vendor/milestone-4.png" alt=""></div>
+                        <div class="ps-block__right"><img src="{% static 'img/vendor/milestone-4.png' %}" alt=""></div>
                         <div class="ps-block__number"><span>4</span></div>
                     </div>
                 </div>
@@ -122,10 +123,10 @@
                     <h5>Setting up your online store and account on Zersh is as free as you can image. We allow you to list your products free and shall only charge you a small percentage once a sale is made.</h5>
                     <div class="ps-section__numbers">
                         <figure>
-                            <h3>0</h3><span>No charge on Registration and Listing</span>
+                            <h3>0</h3><span>List Fee</span>
                         </figure>
                         <figure>
-                            <h3>10%</h3><span>Charge on each sale</span>
+                            <h3>10%</h3><span>Charge per sale</span>
                         </figure>
                     </div>
                     <div class="ps-section__desc">
