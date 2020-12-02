@@ -117,7 +117,7 @@ DATABASES = {
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
-"""    
+ 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -128,7 +128,7 @@ DATABASES = {
         'PORT': '',
     }
 }
-"""
+
 
 
 # Password validation
@@ -226,7 +226,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
+'''
 
 LOGGING = {
     'version': 1,
@@ -243,6 +243,7 @@ LOGGING = {
         },
     },
 }
+'''
 
 django_heroku.settings(locals())
 
