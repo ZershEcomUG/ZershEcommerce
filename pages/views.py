@@ -11,14 +11,13 @@ class HomePageView(ListView):
     model = SubCategory
     template_name = 'home.html'
     queryset = SubCategory.objects.all()
-    pdt = Product.objects.all()[:6]
     cat = Category.objects.all()
     promoImg = PromotionImg.objects.all()
     sliderImgs = Slider.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['products'] = self.pdt
+        context['products'] = Product.objects.order_by('?')[:6]
         context['pdts'] = Product.objects.order_by('?')[:12]
         context['categories'] = self.cat
         context['cates'] = self.cat.order_by('?')
