@@ -152,7 +152,7 @@
                 <li><a href="{% url 'subcat_detail' subcategory.id %}">{{ subcategory.name }}</a></li>
               {% endif %}  
               {% endfor %}
-            </ul><a class="ps-block__more-link" href="#">View All</a>
+            </ul><a class="ps-block__more-link" href="{% url 'cat_detail' category.id %}">View All</a>
           </div>
           <div class="ps-block__slider">
             <div class="ps-carousel--product-box owl-slider" data-owl-auto="true" data-owl-loop="true"
