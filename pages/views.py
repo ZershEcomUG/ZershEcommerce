@@ -11,7 +11,7 @@ class HomePageView(ListView):
     model = SubCategory
     template_name = 'home.html'
     queryset = SubCategory.objects.all()
-    pdt = Product.objects.order_by('?')[:6]
+    pdt = Product.objects.all()[:6]
     cat = Category.objects.all()
     promoImg = PromotionImg.objects.all()
     sliderImgs = Slider.objects.all()
