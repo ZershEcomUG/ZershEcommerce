@@ -165,8 +165,8 @@
             </div>
           </div>
           <div class="ps-block__product-box">
-              {% for product in products  %}
-                {% if product.category.category.name == category.name %}
+              {% for product in products|slice:":30" %}
+                {% if product.category.category.name == category.name  %}
                   <div class="ps-product ps-product--simple">
                     <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' product.id %}"><img src="{{ product.image_300x300.url }}"
                           alt=""></a>
