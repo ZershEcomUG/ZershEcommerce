@@ -165,8 +165,8 @@
             </div>
           </div>
           <div class="ps-block__product-box">
-              {% for product in products|slice:":30" %}
-                {% if product.category.category.name == category.name  %}
+              {% for sub in category.subcategory_set.all|slice:":2" %}
+                {%  for product in sub.product_set.all|slice:":3" %}
                   <div class="ps-product ps-product--simple">
                     <div class="ps-product__thumbnail"><a href="{% url 'pdt_detail' product.id %}"><img src="{{ product.image_300x300.url }}"
                           alt=""></a>
@@ -194,7 +194,7 @@
                       </div>
                     </div>
                   </div>
-                {% endif %}  
+                {% endfor %}
               {% endfor %}
           </div>
         </div>

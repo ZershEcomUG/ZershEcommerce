@@ -4,6 +4,7 @@ from store.models import Category, SubCategory, Product
 from pages.models import Slider, PromotionImg
 from .forms import ContactForm
 from .models import Contact
+from django.db.models import Prefetch
 # Create your views here.
 
 
@@ -12,6 +13,8 @@ class HomePageView(ListView):
     template_name = 'home.html'
     queryset = SubCategory.objects.all()
     cat = Category.objects.all()
+
+
     promoImg = PromotionImg.objects.all()
     sliderImgs = Slider.objects.all()
 
