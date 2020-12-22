@@ -75,6 +75,7 @@
       </div>
     </div>
   </div>
+  {% comment %}
   <div class="ps-promotions">
     <div class="container">
       <div class="row">
@@ -88,6 +89,27 @@
       </div>
     </div>
   </div>
+  {% endcomment %}
+  <div class="ps-promotions">
+    <div class="container">
+      
+      <div class="ps-section__content">
+        <div class="ps-carousel--nav owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000"
+          data-owl-gap="30" data-owl-nav="true" data-owl-dots="true" data-owl-item="5" data-owl-item-xs="2"
+          data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-item-xl="3" data-owl-duration="1000"
+          data-owl-mousedrag="on">
+          {% for pic in promopics %}
+          {% if pic.active == True %}
+            <div class=""><a class="ps-collection" href="#"><img
+                  src="{{ pic.image.url }}" alt=""></a>
+            </div>
+          {% endif %}  
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="ps-deal-of-day">
     <div class="ps-container">
       <div class="ps-section__header">
