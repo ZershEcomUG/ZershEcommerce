@@ -11831,7 +11831,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 
 .ps-form--search-mobile input {
   height: 40px;
-  background-color: #ffffff;
+  background-color: rgb(188, 226, 243);
   border: none;
   border-radius: 0;
 }
@@ -15604,7 +15604,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   z-index: 9999;
   text-align: center;
   border-bottom: 0 none;
-  background-color: #20daeb;
+  background-color: #fff;
   transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
@@ -15699,7 +15699,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #20daeb;
+  background-color: rgb(188, 226, 243);
   -ms-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.12);
 }

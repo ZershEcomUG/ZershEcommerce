@@ -4,6 +4,7 @@ from store.models import Category, SubCategory, Product
 from pages.models import Slider, PromotionImg
 from .forms import ContactForm
 from .models import Contact
+from django.db.models import Prefetch
 # Create your views here.
 
 
@@ -11,16 +12,17 @@ class HomePageView(ListView):
     model = SubCategory
     template_name = 'home.html'
     queryset = SubCategory.objects.all()
-    pdt = Product.objects.all()
     cat = Category.objects.all()
+
+
     promoImg = PromotionImg.objects.all()
     sliderImgs = Slider.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['products'] = self.pdt.order_by('?')[:6]
-        context['pdts'] = self.pdt.order_by('?')[:12]
-        context['categories'] = self.cat.order_by('?')[:5]
+        context['products'] = Product.objects.all()
+        context['pdts'] = Product.objects.order_by('?')[:12]
+        context['categories'] = self.cat
         context['cates'] = self.cat.order_by('?')
         context['subcategories'] = self.queryset
         context['sliders'] = self.sliderImgs[:3]
