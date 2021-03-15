@@ -4239,12 +4239,12 @@ color:#2ecc71;
 
 .ps-block--products-of-category .ps-product--simple {
   background-color: #fff;
-  border-right: 1px solid #e1e1e1;
-  border-top: 1px solid #e1e1e1;
+  /*border-right: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1;*/
 }
 
 .ps-block--products-of-category .ps-product--simple:hover {
-  border-color: #e1e1e1;
+  /*border-color: #e1e1e1;*/
   border-left-color: transparent;
 }
 
@@ -4296,7 +4296,7 @@ color:#2ecc71;
   }
   .ps-block--products-of-category .ps-product--simple {
     padding: 20px;
-    border: 1px solid #e1e1e1;
+    /*border: 1px solid #e1e1e1;*/
     border-right: none;
     border-bottom: none;
   }

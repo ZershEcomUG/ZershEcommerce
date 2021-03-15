@@ -163,9 +163,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-#SSL
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -229,7 +226,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
+'''
 
 LOGGING = {
     'version': 1,
@@ -246,7 +243,7 @@ LOGGING = {
         },
     },
 }
-
+'''
 
 django_heroku.settings(locals())
 
