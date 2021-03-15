@@ -186,6 +186,11 @@
               <a href="#"><img src="{{ category.image_263x629_3.url }}" alt=""></a>
             </div>
           </div>
+          <!-- added image to appear on the mobile devices-->
+          <div class="ps-image_portrait d-lg-block d-xl-none   ">
+            <img src="media/new/1.jpg" alt="">
+          </div>
+          <!-- end mobile device category image-->
           <div class="ps-block__product-box">
               {% for sub in category.subcategory_set.all|slice:":2" %}
                 {%  for product in sub.product_set.all|slice:":3" %}
