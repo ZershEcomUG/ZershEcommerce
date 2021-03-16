@@ -12,7 +12,7 @@ class Category(models.Model):
     image_263x629 = models.ImageField(upload_to='cat_imgs')
     image_263x629_2 = models.ImageField(upload_to='cat_imgs')
     image_263x629_3 = models.ImageField(upload_to='cat_imgs')
-    image_mobi_770x331 = models.ImageField(upload_to='cat_imgs/mobi', blank=True, null=True)
+    image_mobi_770x331 = models.ImageField(upload_to='cat_imgs', blank=True, null=True)
     img_array = [image_263x629, image_263x629_2, image_263x629_3]
     description = models.CharField(max_length=250)
 
